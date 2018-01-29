@@ -1,0 +1,38 @@
+---
+layout: post
+title: "Alright, Here We Are"
+date: 2013-10-07 17:15
+comments: true
+categories: meta-blogging ruby testing customizing octopress SASS 
+---
+
+## *Real First Post!*
+
+Confirmed, the first post went live. [Octopress](http://octopress.org/) up and 
+running. I spent some time today messing around in Octopress with the purpose of customizing a few cosmetic things and was generally successful. It helped me 
+realize I need to add `SASS` to my list of technologies to study harder.
+
+Now that this blog is ready to go I'm going to start using it! I've got to finish 
+the static [About](/about) page as well.
+
+## *Near Future*
+
+Some topics I am interested in and will likely blog about in the future:
+
+- Attempting to better intuit recursion (if it's humanly possible)
+- The beauty of data modeling
+  - *Related*: data and the relationship between computer data and the *real stuff*
+  it represents
+- My tendency towards using more methods (and ones with verbose names) rather than
+less code/nifty loops to accomplish the same goal
+- Meditation on the interaction between the concepts of human-readable code and 
+computer-legible code (the two don't necessarily share *any* attributes)
+  - (I'm pretty excited about this one. there are a million ways to write code that 
+  a computer is ok with, but none of them necessarily make sense to a person and 
+  there are a million ways to write instructions for humans that a computer will 
+  not understand - but the constraint on both sides is where the real interesting 
+  stuff happens.)
+- The solubility of programming problems. What I mean is: if you spend enough time, 
+follow the stack trace carefully, observe the program flow and diligently replace 
+variables, you *will* eventually solve the problem. That's a cool thing. Not all 
+endeavors can claim the same.
