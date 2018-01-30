@@ -18,9 +18,7 @@ email: vinney@exnil.io
 description: This is a place where Vinney Cavallo writes things about programming and other technical stuff
 baseurl: "" # the subpath of your site, e.g. /blog
 url: http://vcavallo.github.io
-twitter_username: vinneycavallo
-github_username:  vcavallo
-author: Vinney Cavallo
+your_name: Vinney Cavallo
 
 subtitle: Vinney Cavallo && Doing Things With Data.
 
@@ -28,6 +26,20 @@ show_excerpts: true
 
 header_pages:
   - about.md
+
+navigation:
+  - text: Home
+    url: /
+  - text: About
+    url: /about
+
+social:
+  - service: github
+    username: vcavallo
+    link: https://github.com/vcavallo
+  - service: twitter
+    username: vinneycavallo
+    link: https://twitter.com/vinneycavallo
 
 disqus:
   shortname: vcavallo-github-io
@@ -38,7 +50,9 @@ excerpt_separator: <!--more-->
 
 # Build settings
 markdown: kramdown
-theme: minima
+#theme: minima
+theme: jekyll-hackcss
+theme_mode: markdown_large
 plugins:
   - jekyll-feed
   - jekyll-seo-tag
