@@ -3,6 +3,7 @@ layout: post
 title: "Alright, Here We Are"
 date: 2013-10-07 17:15
 comments: true
+published: false
 categories: meta-blogging ruby testing customizing octopress SASS 
 ---
 

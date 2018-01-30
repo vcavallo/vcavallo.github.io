@@ -5,5 +5,4 @@
 layout: home
 ---
 
-This is a blog about programming and technology maintained by Vinney Cavallo.  
-[Here's the About page](about).
+This is a blog about programming and technology maintained by Vinney Cavallo.

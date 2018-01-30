@@ -1,9 +1,10 @@
 ---
 layout: page
+title: About
 permalink: /about/
 ---
 
-## Hello!
+### Hello!
 
 This blog is maintained by Vinney Cavallo (me), a person who lives in Providence, RI and does a bunch of things - founding [exnil.io](http://exnil.io) and building great internet products being some of those things. That's mostly what you'll read about on this blog. 
 
