@@ -13,8 +13,6 @@ A little overview of TDD, written at a time when I had just learned about it mys
 
 # Overview of Test-Driven Development
 
-## *Inspired By a Speakerdeck.com Presentation*
-
 Earlier tonight I was flipping through [Jason Arhart](https://github.com/jarhart)'s [Speakerdeck presentation](https://speakerdeck.com/lvrug/introduction-to-tdd-jason-arhart) on the basics of Test-Driven Development and giving a little thought to the topic in general.  
 For starters:
 

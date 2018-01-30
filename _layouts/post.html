@@ -16,7 +16,12 @@ layout: default
   </header>
 
   <div class="post-content e-content" itemprop="articleBody">
-    {{ content }}
+    {% if page.excerpted %}
+    {% assign content = content | split: site.excerpt_separator %}
+      {{ content.last }}
+    {% else %}
+      {{ content }}
+    {% endif %}
   </div>
 
   {% if site.disqus.shortname %}

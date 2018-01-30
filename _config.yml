@@ -26,12 +26,15 @@ subtitle: Vinney Cavallo && Doing Things With Data.
 
 show_excerpts: true
 
+header_pages:
+  - about.md
+
 disqus:
   shortname: vcavallo-github-io
 
 google_tag: UA-72765315-2
 
-excerpt_separator: "<!--more-->"
+excerpt_separator: <!--more-->
 
 # Build settings
 markdown: kramdown

@@ -4,3 +4,6 @@
 # See: https://jekyllrb.com/docs/themes/#overriding-theme-defaults
 layout: home
 ---
+
+This is a blog about programming and technology maintained by Vinney Cavallo.  
+[Here's the About page](about).
