@@ -10,11 +10,11 @@
   <link rel="icon" href="/favicon.png">
 
   <!-- Meta information -->
-  <title>Stack Undertow</title>
+  <title>How to center a pane in vim</title>
   <meta name="description"
-        content="This is a place where Vinney Cavallo writes things about programming and other technical stuff">
+        content="Centering a vim pane within a full-screen terminal window is really nice when focusing on writing a single buffer of non-code prose. Here’s how to do it.">
   <link rel="canonical"
-        href="http://vcavallo.github.io/404/" />
+        href="http://vcavallo.github.io/vim/markdown/how_to/2017/02/28/vim-function-to-visually-center-a-plaintext-file.html" />
 
   <!-- hack.css -->
   <link rel="stylesheet" href="https://npmcdn.com/hack/dist/hack.css" />
@@ -76,26 +76,103 @@
         </aside>
 
         <main class="cell -9of12">
-          <style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-<div class="container">
-  <h1>404</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">How to center a pane in vim</h1>
+    <p class="post-meta">
+      Posted on <time datetime="2017-02-28T16:51:00-05:00"
+            itemprop="datePublished"
+            class="media-heading">
+        Feb 28, 2017 
+      </time>
 
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
-</div>
+      
+        By <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <span itemprop="name">Vinney Cavallo</span>
+        </span>
+      
+    </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    
+      
+      
+
+<h2 id="tldr">TL;DR:</h2>
+
+<p><img src="/images/vim-center-pane.gif" alt="Centering animation" /></p>
+
+<p><a href="https://gist.github.com/vcavallo/c3147fca261c78bd9c4a3648089b22e8#file-vim-centerpane">vimscript gist</a></p>
+
+<p>The idea is to get the <em>content</em> visually centered on the screen.  Typically
+when I am writing non-code text I still use vim - because it’s fantastic no
+matter what you’re doing with text - and in a fullscreen terminal, because
+that’s my workflow for everything. I like to keep to a sane margin width as
+well. Once you are operating like that, it’s natural to want the content
+centered, rather than off to the left side of the screen.</p>
+
+<p><img src="/images/vim-center-target.png" alt="Centered pane target" /><br />
+(we want the white rectangle to appear in the area of the red one)</p>
+
+<p>This is something that vim doesn’t do on its own. There’s probably a plugin for
+it or something but I like to keep my plugins to a minimum, especially when
+it’s for something that the software can do entirely on its own without much
+coercing.</p>
+
+<h2 id="the-solution">The solution</h2>
+
+<p>We can open up a new empty buffer in a vertical split using <code class="highlighter-rouge">:vnew</code>. This gets
+us closer to moving our content around, but it’ll start on the wrong side (the
+empty split will open on the right). Using <code class="highlighter-rouge">:lefta vnew</code> will open the split
+‘left and above’, which in the case of being the first split opened will just
+put it to the left:</p>
+
+<p><img src="/images/vim-left-split.png" alt="Blank split" /></p>
+
+<p>By controlling the width of this left pane we can get the content we’re
+interested in to the spot we want it:</p>
+
+<p><img src="/images/vim-left-split-smaller.png" alt="Resized split" /></p>
+
+<p>Manually creating a split and resizing it every time we want to center some
+content like this is annoying, though. And the whole point of using a
+programmable editor is to make it bend to our every whim with minimal effort.
+Thus:</p>
+
+<h2 id="some-vimscript">Some vimscript</h2>
+
+<p>This happens to be my first vimscript function. I never needed to write one
+until now. It has the benefit of being very simple:</p>
+
+<script src="https://gist.github.com/vcavallo/c3147fca261c78bd9c4a3648089b22e8.js"></script>
+
+<p>The three lines of the function:</p>
+
+<ul>
+  <li>open a new split on the left (and automatically switch to it)</li>
+  <li>switch back to the content pane</li>
+  <li>resize the content pane to be 75% of the total screen</li>
+</ul>
+
+<p>The last line of the above snippet just maps the function call to a key - in
+this case, <code class="highlighter-rouge">Leader - c</code>. You’ll likely need to adjust that mapping as well as
+potentially change the resize amount based on how much spacing you want
+(maybe you use a different margin than I).</p>
+
+<p><strong>Huge disclaimer</strong>: I haven’t yet tested this on a screen size other than the
+one I just wrote this function and post on… Might be completely broken
+everywhere but this here laptop!</p>
+
+<p>I’d be happy if any readers leave comments or scoldings on that gist. I’m sure
+there are things wrong with it.<br />
+Enjoy!</p>
+
+    
+  </div>
+
+</article>
 
         </main>
       </div>
