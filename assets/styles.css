@@ -1,0 +1,39 @@
+code.highlighter-rouge { padding: 0; padding-top: 0.2em; padding-bottom: 0.2em; margin: 0; font-size: 85%; background-color: rgba(0, 0, 0, 0.04); border-radius: 3px; }
+
+aside[role="navigation"] { padding-right: 15px; }
+
+.t-hackcss-body-large { font-size: 1.25em; line-height: 1.4; }
+.t-hackcss-body-large h1 { font-size: 2em; font-weight: bold; margin: 0.67em 0; }
+.t-hackcss-body-large h1:after { bottom: 7px; }
+.t-hackcss-body-large h2 { font-size: 1.5em; font-weight: bold; margin: 0.83em 0; }
+.t-hackcss-body-large h3 { font-size: 1.17em; font-weight: bold; margin: 1.75rem 0; }
+.t-hackcss-body-large a { color: #444; border-bottom: 1px solid #444; }
+.t-hackcss-body-large a:hover { color: white; background: #444; }
+.t-hackcss-body-large p { margin: 1.75rem 0; }
+.t-hackcss-body-large ul, .t-hackcss-body-large ol { display: block; list-style-type: none; padding-left: 20px; margin: 1.75rem 0; }
+.t-hackcss-body-large ul ul, .t-hackcss-body-large ol ul { margin: .75rem 0; list-style-type: none; }
+.t-hackcss-body-large ol { list-style-type: none; }
+.t-hackcss-body-large li { display: list-item; padding-left: 0; }
+.t-hackcss-body-large li:after { left: -16px; }
+.t-hackcss-body-large blockquote { font-size: 1.17em; margin: 1.75rem 0; padding-left: 20px; }
+.t-hackcss-body-large pre { margin: 1.75rem 0; white-space: pre; }
+.t-hackcss-body-large em { font-size: 1.25rem; font-style: italic; }
+.t-hackcss-body-large strong { font-size: 1.25rem; font-style: bold; }
+.t-hackcss-body-large hr { border: 0; height: 1px; display: block; background-color: #e2e2e2; margin: 1.75rem 0; }
+.t-hackcss-navigation { padding-right: 10px; }
+.hack .t-hackcss-navigation-heading { padding-top: 20px; }
+body .t-hackcss-footer { padding-bottom: 10px; }
+.t-hackcss-social { display: inline-block; }
+.t-hackcss-social + .t-hackcss-social { padding-left: 10px; }
+@media screen and (max-width: 768px) { .t-hackcss-sm-reversed-grid.grid { flex-direction: column-reverse; } }
+.t-hackcss-icon { display: inline-block; vertical-align: middle; width: 15px; height: 15px; }
+.t-hackcss-icon > svg { width: 15px; }
+.t-hackcss-media { margin-bottom: 1.25rem; }
+.t-hackcss-media-shift { max-width: 50px; }
+.t-hackcss-media-image { display: block; max-width: 100%; height: auto; }
+.t-hackcss-cards { flex-wrap: wrap; }
+@media screen and (max-width: 768px) { .t-hackcss-cards { flex-wrap: nowrap; } }
+.t-hackcss-cards-cell { padding-bottom: 10px; padding-right: 10px; }
+.t-hackcss-cards-text { margin: 0; }
+.t-hackcss-cards-image { display: block; max-width: 50%; height: auto; margin: 0 auto; }
+.t-hackcss-cards-link { text-align: center; }

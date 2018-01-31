@@ -1,0 +1,226 @@
+<!DOCTYPE html>
+<html>
+
+  <head>
+  <meta charset="utf-8">
+  <meta http-equiv="X-UA-Compatible" content="IE=edge">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+
+  <!-- Favicon -->
+  <link rel="icon" href="/favicon.png">
+
+  <!-- Meta information -->
+  <title>Overview Test-Driven Development</title>
+  <meta name="description"
+        content="A little overview of TDD, written at a time when I had just learned about it myself.">
+  <link rel="canonical"
+        href="http://vcavallo.github.io/presentations/tdd/tes-driven/development/rspec/speakerdeck/test-driven-development-presentation-review/" />
+
+  <!-- hack.css -->
+  <link rel="stylesheet" href="https://npmcdn.com/hack/dist/hack.css" />
+  
+
+  <!-- Prism.js -->
+  <link rel="stylesheet" href="https://npmcdn.com/prismjs@1.5.1/themes/prism.css" />
+
+  <!-- Custom style -->
+  <link rel="stylesheet" href="/assets/styles.css" />
+  <!--jekyll-hackcss-->
+
+  
+    <link rel="stylesheet" href="/assets/custom-styles.css" />
+  
+
+  <!-- Feed -->
+  <link rel="alternate" type="application/rss+xml" title="Stack Undertow"
+        href="/feed.xml" />
+
+  <!-- 'jekyll-seo' plugin -->
+  
+</head>
+
+
+
+  
+  <body class="hack t-hackcss-body-large">
+  
+
+    
+
+    <div class="container">
+      <div class="grid">
+        <aside class="cell -3of12" role="navigation">
+          <div class="t-hackcss-navigation">
+  <h2 class="t-hackcss-navigation-heading"><a style="border-bottom: none;" href="/">Stack Undertow</a></h2>
+
+  <nav class="menu" role="menubar">
+    
+    
+      <a class="menu-item "
+        role="menuitem" href="/" title="">
+        Home <div class="pull-right">&gt;&gt;</div>
+      </a>
+    
+      <a class="menu-item "
+        role="menuitem" href="/about" title="">
+        About <div class="pull-right">&gt;&gt;</div>
+      </a>
+    
+
+    
+  </nav>
+
+</div>
+
+
+        </aside>
+
+        <main class="cell -9of12">
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
+
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">Overview Test-Driven Development</h1>
+    <p class="post-meta">
+      Posted on <time datetime="2013-10-07T21:52:00-04:00"
+            itemprop="datePublished"
+            class="media-heading">
+        Oct 7, 2013 
+      </time>
+
+      
+        By <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <span itemprop="name">Vinney Cavallo</span>
+        </span>
+      
+    </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    
+      
+      
+
+<p>Earlier tonight I was flipping through <a href="https://github.com/jarhart">Jason Arhart</a>’s <a href="https://speakerdeck.com/lvrug/introduction-to-tdd-jason-arhart">Speakerdeck presentation</a> on the basics of Test-Driven Development and giving a little thought to the topic in general.<br />
+For starters:</p>
+
+<h3 id="a-little-overview-of-tdd">A little overview of TDD</h3>
+
+<p>TDD is a system in which you create a suite of tests to ensure your code stays in line during development. It takes advantage of a few truisms that surround programming:</p>
+
+<ul>
+  <li>Repetition is key to testing</li>
+  <li>Computers are good at repetition</li>
+  <li><del>Humans</del> Programmers like automating repetitive tasks</li>
+</ul>
+
+<blockquote>
+  <p>“Why use TDD instead of whatever it is I normally do?”</p>
+  <ul>
+    <li>You, sounding a bit silly.</li>
+  </ul>
+</blockquote>
+
+<p>Well, see what you said there? The second part of the sentence? You most likely have a general plan for your code, write a little, play with it and see if it breaks, write a little more, etc. Before you know it you’ve got a whole bunch of code, testing it becomes cumbersome and your test coverage starts to get a little spotty. Worst of all, you don’t know when you’re missing something. - That is, until something breaks a little later.</p>
+
+<blockquote>
+  <p>“Ok, I guess that doesn’t sound so smart. What’s this thing you’re talking about?”</p>
+  <ul>
+    <li>You again, wising up.</li>
+  </ul>
+</blockquote>
+
+<p>This thing is <strong><a href="http://en.wikipedia.org/wiki/Test-driven_development">test-first development</a></strong>. Before you write a line of production code, you’re going to write at least one (failing, for now) test that describes what your program <em>should</em> do when it’s working properly. By keeping the end goal in your sights you minimize the risk of diluting your focus throughout the coding process.</p>
+
+<ul>
+  <li>You start with a failing test and then write only enough code to make it pass</li>
+  <li>Then you write some more tests (a bunch, if you like) and write only enough code to make each of those tests pass, in order.
+    <ul>
+      <li>(check out the <code class="highlighter-rouge">--fail-fast</code> flag, when the time is right).</li>
+    </ul>
+  </li>
+</ul>
+
+<p>All of this careful attention to the intended end result has an added bonus, as if having working code isn’t pleasant enough: Refactoring is safer and more fun. The adage goes:</p>
+
+<h2 id="red--green--refactor"><span style="color:red">Red</span> | <span style="color:green">Green</span> | <span style="color:blue">Refactor</span></h2>
+
+<p>And then <strong>[repeat]</strong>. Once you’ve got passing tests, refactor, look out for red (make it pass again) and continue. Never refactor unless all your tests pass.<br />
+It nicely echoes <a href="http://en.wikipedia.org/wiki/Kent_Beck">Kent Beck</a>’s “Make it Work, Make it Right, Make it Fast”.</p>
+
+<blockquote>
+  <p>“That sounds great! Aren’t there any downsides, though?”</p>
+  <ul>
+    <li>You, bringing up a good point…</li>
+  </ul>
+</blockquote>
+
+<p><strong>“Sure”</strong>. is the answer. <strong>“False Positives”</strong> is one elaboration of that answer. There is no clear way to test <em>the tests</em>, aside from being really careful and diligent when writing them - but even then there are bound to be mistakes sometimes. That’s the whole reason you write tests to begin with: to account for your mistakes or normal human inability to complete every complex task with 100% accuracy on the first try.<br />
+Another pitfall is the tendency to veer towards <a href="http://en.wikipedia.org/wiki/Happy_path">The Happy Path</a> whenever possible. Your tests are only as good as your natural or tailored skepticism. Doubt yourself often and rigidly.</p>
+
+<h2 id="a-final-thought-that-intrigues-me">A final thought that intrigues me</h2>
+
+<p>…in the context of TDD. Looking at a full suite of tests with its <br />
+<code class="highlighter-rouge">such-and-such method should do this-thing</code><br />
+evokes a curious idea… <em>Yes, that method should do that thing. Why should I have to tell it how?</em> It seems like having a computer figure out how some not-yet-written code should behave based on some simple human-readable instruction is the next logical step in the process. As a programmer, you switch gears from “Test-Designer Overlord” to “Code Implementer Monkey” during the TDD process. Doesn’t the former sound more human and the latter more machinated? The same way an automatic transmission knows to shift when we want the car to drive at a certain speed, how long do we have to wait until an interpreter knows how to write a method, given some discrete instructions? Uh oh, sounds like some(many thousand)one would be out of a job!</p>
+
+<h2 id="further-tdd-reading">Further TDD Reading?</h2>
+<p>Check <a href="http://betterspecs.org/">This</a> out.</p>
+
+    
+  </div>
+
+</article>
+
+        </main>
+      </div>
+
+    <footer class="t-hackcss-footer">
+  <hr />
+
+  <h3 class="footer-heading">Stack Undertow</h3>
+
+  <div class="grid t-hackcss-sm-reversed-grid">
+
+    <div class="cell -5of12">
+      <div class="contact-list">
+        <p>
+          Vinney Cavallo,
+          <a href="mailto:vinney@exnil.io">vinney@exnil.io</a>
+        </p>
+
+        
+          
+          <span class="t-hackcss-social">
+            <i class="t-hackcss-icon"><svg viewBox="0 0 16 16"><path fill="#828282" d="M7.999,0.431c-4.285,0-7.76,3.474-7.76,7.761 c0,3.428,2.223,6.337,5.307,7.363c0.388,0.071,0.53-0.168,0.53-0.374c0-0.184-0.007-0.672-0.01-1.32 c-2.159,0.469-2.614-1.04-2.614-1.04c-0.353-0.896-0.862-1.135-0.862-1.135c-0.705-0.481,0.053-0.472,0.053-0.472 c0.779,0.055,1.189,0.8,1.189,0.8c0.692,1.186,1.816,0.843,2.258,0.645c0.071-0.502,0.271-0.843,0.493-1.037 C4.86,11.425,3.049,10.76,3.049,7.786c0-0.847,0.302-1.54,0.799-2.082C3.768,5.507,3.501,4.718,3.924,3.65 c0,0,0.652-0.209,2.134,0.796C6.677,4.273,7.34,4.187,8,4.184c0.659,0.003,1.323,0.089,1.943,0.261 c1.482-1.004,2.132-0.796,2.132-0.796c0.423,1.068,0.157,1.857,0.077,2.054c0.497,0.542,0.798,1.235,0.798,2.082 c0,2.981-1.814,3.637-3.543,3.829c0.279,0.24,0.527,0.713,0.527,1.437c0,1.037-0.01,1.874-0.01,2.129 c0,0.208,0.14,0.449,0.534,0.373c3.081-1.028,5.302-3.935,5.302-7.362C15.76,3.906,12.285,0.431,7.999,0.431z"></path></svg>
+</i>
+            <a href="https://github.com/vcavallo">vcavallo</a>
+          </span>
+        
+          
+          <span class="t-hackcss-social">
+            <i class="t-hackcss-icon"><svg viewBox="0 0 16 16"><path fill="#828282" d="M15.969,3.058c-0.586,0.26-1.217,0.436-1.878,0.515c0.675-0.405,1.194-1.045,1.438-1.809c-0.632,0.375-1.332,0.647-2.076,0.793c-0.596-0.636-1.446-1.033-2.387-1.033c-1.806,0-3.27,1.464-3.27,3.27 c0,0.256,0.029,0.506,0.085,0.745C5.163,5.404,2.753,4.102,1.14,2.124C0.859,2.607,0.698,3.168,0.698,3.767 c0,1.134,0.577,2.135,1.455,2.722C1.616,6.472,1.112,6.325,0.671,6.08c0,0.014,0,0.027,0,0.041c0,1.584,1.127,2.906,2.623,3.206 C3.02,9.402,2.731,9.442,2.433,9.442c-0.211,0-0.416-0.021-0.615-0.059c0.416,1.299,1.624,2.245,3.055,2.271 c-1.119,0.877-2.529,1.4-4.061,1.4c-0.264,0-0.524-0.015-0.78-0.046c1.447,0.928,3.166,1.469,5.013,1.469 c6.015,0,9.304-4.983,9.304-9.304c0-0.142-0.003-0.283-0.009-0.423C14.976,4.29,15.531,3.714,15.969,3.058z"/></svg>
+
+</i>
+            <a href="https://twitter.com/vinneycavallo">vinneycavallo</a>
+          </span>
+        
+      </div>
+    </div>
+
+    <div id="footer-spacer" class="cell -1of12"></div>
+
+    <div class="cell -6of12">
+      <p>This is a place where Vinney Cavallo writes things about programming and other technical stuff</p>
+    </div>
+  </div>
+
+</footer>
+
+
+    </div>
+
+    <!-- Prism.js -->
+    <script src="https://npmcdn.com/prismjs@1.5.1/prism.js"></script>
+  </body>
+
+</html>
