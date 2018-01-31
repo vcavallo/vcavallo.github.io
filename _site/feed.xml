@@ -1,0 +1,575 @@
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://vcavallo.github.io/feed.xml" rel="self" type="application/atom+xml" /><link href="http://vcavallo.github.io/" rel="alternate" type="text/html" /><updated>2018-01-31T10:20:30-05:00</updated><id>http://vcavallo.github.io/</id><title type="html">Stack Undertow</title><subtitle>This is a place where Vinney Cavallo writes things about programming and other technical stuff</subtitle><author><name>Vinney Cavallo</name></author><entry><title type="html">Setting up Middleman and Tailwind CSS</title><link href="http://vcavallo.github.io/css/static_site_generator/how_to/setting-up-middleman-with-tailwind-css/" rel="alternate" type="text/html" title="Setting up Middleman and Tailwind CSS" /><published>2017-12-06T16:16:00-05:00</published><updated>2017-12-06T16:16:00-05:00</updated><id>http://vcavallo.github.io/css/static_site_generator/how_to/setting-up-middleman-with-tailwind-css</id><content type="html" xml:base="http://vcavallo.github.io/css/static_site_generator/how_to/setting-up-middleman-with-tailwind-css/">&lt;p&gt;Middleman and Tailwind make landing pages a breeze (get it?). Here’s how to get them to work together!&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;I’m a big fan of the &lt;a href=&quot;https://middlemanapp.com/&quot;&gt;Middleman&lt;/a&gt; static site generator and static sites / markdown blogs in general:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;My consultancy’s site, &lt;a href=&quot;http://exnil.io&quot;&gt;exnil.io&lt;/a&gt; is built on Middleman.&lt;/li&gt;
+  &lt;li&gt;&lt;a href=&quot;http://blog.vinneycavallo.com/&quot;&gt;My personal blog&lt;/a&gt; is built on &lt;a href=&quot;https://jekyllrb.com/&quot;&gt;Jekyll&lt;/a&gt; - a sort of cousin to Middleman.&lt;/li&gt;
+  &lt;li&gt;And this site you’re reading is &lt;a href=&quot;http://octopress.org/&quot;&gt;Octopress&lt;/a&gt;, a kinda defunct Jekyll nephew. (used to be Octopress… Migrated to Jekyll in 2018)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;Lately I’ve been drinking the &lt;strong&gt;utility-first CSS&lt;/strong&gt; kool-aid with glee. As others before me have also noted, &lt;a href=&quot;https://adamwathan.me/css-utility-classes-and-separation-of-concerns/&quot;&gt;Adam Wathan’s blog post&lt;/a&gt; makes the argument quite well, so I won’t get into my reasons here. Since I just mentioned Adam, it won’t be a surprise that my utility-centric CSS framework of choice at the moment is &lt;a href=&quot;https://tailwindcss.com/&quot;&gt;Tailwind CSS&lt;/a&gt;, which he co-created (or “&lt;em&gt;is currently co-creating&lt;/em&gt;” since they are currently hard at work on the road to 1.0. And really when can the creation of any piece of software be in the &lt;em&gt;past tense&lt;/em&gt;?)&lt;/p&gt;
+
+&lt;p&gt;I set out to build a pre-launch landing page for a new web app idea for which I am attempting to take a community pulse. I’m tentatively calling it &lt;a href=&quot;http://www.ratemyrefactor.com&quot;&gt;Rate my Refactor&lt;/a&gt; and the point of it is to facilitate discussion and advice around specific instances of refactoring and code quality.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/rmr-screenshot.png&quot; alt=&quot;Rate my Refactor screenshot&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;The speed and friction-reduction afforded by both Tailwind and Middleman make their team-up a natural choice for a simple landing page. In an effort to hit the ground running I popped over to Google to find some direction on getting Middleman, Webpack, PostCSS and Tailwind to all play nicely together. (disclaimer, I’m traditionally a back-end developer so the unholy union of &lt;code class=&quot;highlighter-rouge&quot;&gt;npm/yarn/webpack/gulp/js/postcss/etc/etc&lt;/code&gt; doesn’t just come naturally to my fingertips.)&lt;/p&gt;
+
+&lt;p&gt;I found a whole lot of nothing Googling around for this. Probably because most front-end devs come out of the womb knowing their way around yarn balls, gulps, and webby packs - but as I said, that’s not me. Apparently I’m not alone: &lt;a href=&quot;http://www.impostorroster.com/posts/cannot-understand-how-webpack-works&quot;&gt;http://www.impostorroster.com/posts/cannot-understand-how-webpack-works&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;So I figure there’s gotta be someone else out there looking for this answer.&lt;br /&gt;
+Hello, someone! Here it is:&lt;/p&gt;
+
+&lt;h1 id=&quot;show-me-how-to-do-it-already&quot;&gt;Show Me How To Do It Already!&lt;/h1&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://github.com/vcavallo/middleman-and-tailwind&quot;&gt;Here’s a GitHub repo all set up for you&lt;/a&gt;. These are the main bits:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Middleman settings:
+    &lt;ul&gt;
+      &lt;li&gt;the &lt;code class=&quot;highlighter-rouge&quot;&gt;activate :external_pipeline&lt;/code&gt; line in &lt;code class=&quot;highlighter-rouge&quot;&gt;config.rb&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Webpack setup:
+    &lt;ul&gt;
+      &lt;li&gt;settings for js and css in &lt;code class=&quot;highlighter-rouge&quot;&gt;webpack.config.js&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;the contents of &lt;code class=&quot;highlighter-rouge&quot;&gt;package.json&lt;/code&gt;&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+  &lt;li&gt;Tailwind config:
+    &lt;ul&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;postcss.config.js&lt;/code&gt;&lt;/li&gt;
+      &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;tailwind.js&lt;/code&gt; (generated as directed in their installation docs)&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;As an added bonus, this repo also has the configs necessary for an easy Heroku deploy.&lt;/p&gt;
+
+&lt;h1 id=&quot;the-final-product&quot;&gt;The Final Product…&lt;/h1&gt;
+
+&lt;p&gt;I invite you to check out &lt;a href=&quot;http://www.ratemyrefactor.com&quot;&gt;Rate my Refactor&lt;/a&gt; for an example of a basic Middleman+Tailwind+Heroku site. Since you’re reading a programming blog you probably care at least a little about refactoring - so why not sign up for the email list while you’re over there?!&lt;/p&gt;
+
+&lt;p&gt;Thanks! If you have any improvements or problems please drop them in the comments below.&lt;/p&gt;</content><author><name>Vinney Cavallo</name></author><summary type="html">Middleman and Tailwind make landing pages a breeze (get it?). Here’s how to get them to work together!</summary></entry><entry><title type="html">How to beat the Impostor Syndrome</title><link href="http://vcavallo.github.io/industry/apps/announcements/launching-the-impostor-roster/" rel="alternate" type="text/html" title="How to beat the Impostor Syndrome" /><published>2017-03-01T17:09:00-05:00</published><updated>2017-03-01T17:09:00-05:00</updated><id>http://vcavallo.github.io/industry/apps/announcements/launching-the-impostor-roster</id><content type="html" xml:base="http://vcavallo.github.io/industry/apps/announcements/launching-the-impostor-roster/">&lt;p&gt;Presenting a cure for Impostor Syndrome - in the form of a simple CRUD app that got shoved out of the nest before it thought it was ready. You could say it had a touch of impostor syndrome itself.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;impostors-phonies-and-charlatans---rejoice&quot;&gt;Impostors, Phonies and Charlatans - Rejoice!&lt;/h1&gt;
+
+&lt;p&gt;When I first started programming, the concept of Impostor Syndrome really hit
+home.&lt;/p&gt;
+
+&lt;p&gt;You start off feeling like an impostor at everything and slowly the
+number of topics you feel like a phony participating in recede, but the pool never drains
+completely. There are always &lt;em&gt;some&lt;/em&gt; things you think you should be a lot better
+at and that you just &lt;em&gt;know&lt;/em&gt; everyone ELSE is great at. Everyone but &lt;strong&gt;YOU&lt;/strong&gt; of
+course…&lt;br /&gt;
+And indeed that will be true for some things - for everyone. And that’s the
+important point. Just about everybody feels this way (citation needed), and
+realizing the truth of that fact is all that is necessary to chase away any
+significant aspects of the Impostor Syndrome feeling. Briefly,&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;If everyone is an impostor, then no one is.&lt;/strong&gt;
+&lt;br /&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;h2 id=&quot;step-up-and-admit-your-shortcomings-here&quot;&gt;Step up and admit your shortcomings here:&lt;/h2&gt;
+
+&lt;p&gt;Today I’m finally launching &lt;a href=&quot;http://impostorroster.com&quot;&gt;The Impostor Roster&lt;/a&gt;.&lt;/p&gt;
+
+&lt;p&gt;I started (and basically finished) this little app in the first few months of
+my programming career - which is why it sorta sucks. Like lots of other
+projects of mine, I have a backlog of things I want to do before “it’s ready”
+to go live. Ocassionally I chip a few things off that backlog, but more often
+than not every time I open up the site again  I add &lt;em&gt;more&lt;/em&gt; items to fix or
+improve before “it’s ready” rather than advance the needle any closer to
+production.&lt;/p&gt;
+
+&lt;p&gt;This time I’m just sending it out there. It’s terrifically embarrassing in a
+number of ways but I’m doing my best to ignore it and hope to fix those things
+down the line a piece.  Now is an especially important moment because of a
+&lt;a href=&quot;https://twitter.com/dhh/status/834146806594433025&quot;&gt;tweet from DHH&lt;/a&gt; and a bunch
+of industry excitement and articles resulting from it. This atmosphere of
+“admit all your professional sins” is &lt;strong&gt;precisely&lt;/strong&gt; the reason I started to
+build the Impostor Roster. It galls me a bit that I missed the wave on this
+one, but I’m hoping to catch some of the run off by getting this out there
+today.&lt;/p&gt;
+
+&lt;h2 id=&quot;an-ugly-deployment&quot;&gt;An ugly deployment&lt;/h2&gt;
+
+&lt;p&gt;The site was sitting in a free Heroku app that needed to be upgraded to a
+modern Cedar stack and I found a bunch of app-breaking bugs in the last hour or
+so (amazing that there could be bugs in what’s basically a Rails scaffold,
+eh?).&lt;br /&gt;
+I realize that this application is just begging for defacement and abuse
+given that there is no moderation or accounts or flagging of any kind. There is
+also no pagination, no nice autocomplete for the category field, a weird system
+of ‘number of months of experience’ that doesn’t convert to years, no way to
+say ‘Me Too!’ to someone else’s post - forcing you to add you own identical
+item, etc. etc. etc. But hey - I’m deploying it anyway.&lt;/p&gt;
+
+&lt;p&gt;I hope you like it and use it. Get in touch somewhere or other if you have thoughts.&lt;/p&gt;</content><author><name>Vinney Cavallo</name></author><summary type="html">Presenting a cure for Impostor Syndrome - in the form of a simple CRUD app that got shoved out of the nest before it thought it was ready. You could say it had a touch of impostor syndrome itself.</summary></entry><entry><title type="html">How to center a pane in vim</title><link href="http://vcavallo.github.io/vim/markdown/how_to/vim-function-to-visually-center-a-plaintext-file/" rel="alternate" type="text/html" title="How to center a pane in vim" /><published>2017-02-28T16:51:00-05:00</published><updated>2017-02-28T16:51:00-05:00</updated><id>http://vcavallo.github.io/vim/markdown/how_to/vim-function-to-visually-center-a-plaintext-file</id><content type="html" xml:base="http://vcavallo.github.io/vim/markdown/how_to/vim-function-to-visually-center-a-plaintext-file/">&lt;style type=&quot;text/css&quot;&gt; /* Better styles for embedding GitHub Gists */
+.line-data { font-size:11px; font-family: Consolas,&quot;Liberation
+Mono&quot;,Courier,monospace; } .line-numbers { font-size:11px; background-color:
+#ECECEC; border-right: 1px solid red; color: #AAAAAA; padding: 0.0em;
+text-align: right; } .line-pre { font-size:11px;font-family:
+Consolas,&quot;Liberation Mono&quot;,Courier,monospace; } &lt;/style&gt;
+
+&lt;p&gt;Centering a vim pane within a full-screen terminal window is really nice when focusing on writing a single buffer of non-code prose. Here’s how to do it.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/vim-center-pane.gif&quot; alt=&quot;Centering animation&quot; /&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h2 id=&quot;tldr&quot;&gt;TL;DR:&lt;/h2&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/vim-center-pane.gif&quot; alt=&quot;Centering animation&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;&lt;a href=&quot;https://gist.github.com/vcavallo/c3147fca261c78bd9c4a3648089b22e8#file-vim-centerpane&quot;&gt;vimscript gist&lt;/a&gt;&lt;/p&gt;
+
+&lt;p&gt;The idea is to get the &lt;em&gt;content&lt;/em&gt; visually centered on the screen.  Typically
+when I am writing non-code text I still use vim - because it’s fantastic no
+matter what you’re doing with text - and in a fullscreen terminal, because
+that’s my workflow for everything. I like to keep to a sane margin width as
+well. Once you are operating like that, it’s natural to want the content
+centered, rather than off to the left side of the screen.&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/vim-center-target.png&quot; alt=&quot;Centered pane target&quot; /&gt;&lt;br /&gt;
+(we want the white rectangle to appear in the area of the red one)&lt;/p&gt;
+
+&lt;p&gt;This is something that vim doesn’t do on its own. There’s probably a plugin for
+it or something but I like to keep my plugins to a minimum, especially when
+it’s for something that the software can do entirely on its own without much
+coercing.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-solution&quot;&gt;The solution&lt;/h2&gt;
+
+&lt;p&gt;We can open up a new empty buffer in a vertical split using &lt;code class=&quot;highlighter-rouge&quot;&gt;:vnew&lt;/code&gt;. This gets
+us closer to moving our content around, but it’ll start on the wrong side (the
+empty split will open on the right). Using &lt;code class=&quot;highlighter-rouge&quot;&gt;:lefta vnew&lt;/code&gt; will open the split
+‘left and above’, which in the case of being the first split opened will just
+put it to the left:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/vim-left-split.png&quot; alt=&quot;Blank split&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;By controlling the width of this left pane we can get the content we’re
+interested in to the spot we want it:&lt;/p&gt;
+
+&lt;p&gt;&lt;img src=&quot;/images/vim-left-split-smaller.png&quot; alt=&quot;Resized split&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Manually creating a split and resizing it every time we want to center some
+content like this is annoying, though. And the whole point of using a
+programmable editor is to make it bend to our every whim with minimal effort.
+Thus:&lt;/p&gt;
+
+&lt;h2 id=&quot;some-vimscript&quot;&gt;Some vimscript&lt;/h2&gt;
+
+&lt;p&gt;This happens to be my first vimscript function. I never needed to write one
+until now. It has the benefit of being very simple:&lt;/p&gt;
+
+&lt;script src=&quot;https://gist.github.com/vcavallo/c3147fca261c78bd9c4a3648089b22e8.js&quot;&gt;&lt;/script&gt;
+
+&lt;p&gt;The three lines of the function:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;open a new split on the left (and automatically switch to it)&lt;/li&gt;
+  &lt;li&gt;switch back to the content pane&lt;/li&gt;
+  &lt;li&gt;resize the content pane to be 75% of the total screen&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The last line of the above snippet just maps the function call to a key - in
+this case, &lt;code class=&quot;highlighter-rouge&quot;&gt;Leader - c&lt;/code&gt;. You’ll likely need to adjust that mapping as well as
+potentially change the resize amount based on how much spacing you want
+(maybe you use a different margin than I).&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;Huge disclaimer&lt;/strong&gt;: I haven’t yet tested this on a screen size other than the
+one I just wrote this function and post on… Might be completely broken
+everywhere but this here laptop!&lt;/p&gt;
+
+&lt;p&gt;I’d be happy if any readers leave comments or scoldings on that gist. I’m sure
+there are things wrong with it.&lt;br /&gt;
+Enjoy!&lt;/p&gt;</content><author><name>Vinney Cavallo</name></author><summary type="html">Centering a vim pane within a full-screen terminal window is really nice when focusing on writing a single buffer of non-code prose. Here’s how to do it.</summary></entry><entry><title type="html">A Way To Share Bash Scripts Between Machines</title><link href="http://vcavallo.github.io/bash/git/scripts/environments/sharing-bash-scripts-between-machines/" rel="alternate" type="text/html" title="A Way To Share Bash Scripts Between Machines" /><published>2015-08-29T13:30:00-04:00</published><updated>2015-08-29T13:30:00-04:00</updated><id>http://vcavallo.github.io/bash/git/scripts/environments/sharing-bash-scripts-between-machines</id><content type="html" xml:base="http://vcavallo.github.io/bash/git/scripts/environments/sharing-bash-scripts-between-machines/">&lt;p&gt;Or: How I thought I invented the “dotfiles” and “scripts” repo idea… Read on if you like having access to the same command-line tools on different machines.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;scripts-that-get-around&quot;&gt;Scripts that get around&lt;/h1&gt;
+
+&lt;p&gt;&lt;em&gt;I couldn’t think of a better title, but infinite second-guessing is what has kept this 
+blog update-less for two years. No more.&lt;/em&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;making-computers-do-stuff-i-want&quot;&gt;Making computers do stuff I want&lt;/h2&gt;
+
+&lt;p&gt;I’ve recently been expanding my knowledge of Bash and the *NIX system in general&lt;sup id=&quot;fnref:1&quot;&gt;&lt;a href=&quot;#fn:1&quot; class=&quot;footnote&quot;&gt;1&lt;/a&gt;&lt;/sup&gt;. It 
+has been extremely rewarding both as an intellectual hobby and in terms of increasing 
+my productivity and lower-level understanding of what exactly is going on under the hood 
+when I’m doing …well &lt;em&gt;anything&lt;/em&gt; on a computer. In any creative or intellectual field 
+composed of an array of siloed information - a horizontal of verticals - the deeper down 
+you can get into the most number of verticals, the more useful your creative contribution 
+will be / the better you’ll understand the overall topic. 
+&lt;a href=&quot;http://waitbutwhy.com/2015/06/how-tesla-will-change-your-life.html&quot;&gt;This excellent Wait But Why post&lt;/a&gt; 
+discusses this general concept quite a bit in the beginning and it really spoke to me. 
+I recommend you listen to it so it can speak to you also.&lt;/p&gt;
+
+&lt;p&gt;But I’m seriously digressing. This post is about how I set up some super simple and fun 
+Bash scripts in concert in order to solve an actual problem I often have:&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;strong&gt;I want to able to do certain minor custom command-line things on a number of different computers.&lt;/strong&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;The tasks are simple: things like “open up vim inside a certain directory” or “transform 
+some string on my clipboard” - super easy stuff that doesn’t necessarily warrant an afternoon 
+of experimenting and blog-post-writing. But now I have a framework for myself to expand 
+upon, plus I learned some cool stuff along the way (I purposefully didn’t search Google 
+for a preexisting solution, which I am &lt;em&gt;sure&lt;/em&gt; exists since I already use 
+&lt;a href=&quot;http://blog.smalleycreative.com/tutorials/using-git-and-github-to-manage-your-dotfiles/&quot;&gt;something similar for dotfiles&lt;/a&gt;)&lt;/p&gt;
+
+&lt;h2 id=&quot;a-github-repo-for-you&quot;&gt;A github repo for you&lt;/h2&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;https://github.com/vcavallo/scripts&quot;&gt;Here is the repo I made&lt;/a&gt;&lt;/strong&gt;. The bones of it are 
+as follows:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;readme.md&lt;/code&gt; - duh.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;install.sh&lt;/code&gt; - this installs the scripts for you so you can use them right away.&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;directory and files&lt;/code&gt; example files - these serve as instructions. explained in readme.&lt;/li&gt;
+  &lt;li&gt;the actual bash scripts.&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The general idea is that the installer makes scripts executable and symlinks in a 
+place in your PATH, getting its relevant information from the &lt;code class=&quot;highlighter-rouge&quot;&gt;directory&lt;/code&gt; and &lt;code class=&quot;highlighter-rouge&quot;&gt;files&lt;/code&gt; 
+in order to be flexible and environment-semi-agnostic.&lt;/p&gt;
+
+&lt;p&gt;There are many things I should change&lt;sup id=&quot;fnref:2&quot;&gt;&lt;a href=&quot;#fn:2&quot; class=&quot;footnote&quot;&gt;2&lt;/a&gt;&lt;/sup&gt;, so this blog post might quicky be reflective 
+of some past version of the repo rather than the present version you see but I’m sure 
+the general idea will hold true.&lt;/p&gt;
+
+&lt;h2 id=&quot;serious-things-i-learned&quot;&gt;Serious things I learned:&lt;/h2&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;The &lt;code class=&quot;highlighter-rouge&quot;&gt;~&lt;/code&gt; character gets expanded by Bash. This can make weird things happen if you’re unsure 
+  how you’re using the &lt;code class=&quot;highlighter-rouge&quot;&gt;~&lt;/code&gt; in different parts of your script. I kept getting unknown 
+  file or directory errors on &lt;code class=&quot;highlighter-rouge&quot;&gt;~/scripts&lt;/code&gt; when I was working on the &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod a+x&lt;/code&gt; part. 
+  It was &lt;em&gt;extremely&lt;/em&gt; confusing! which brings me to…&lt;/li&gt;
+  &lt;li&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;-xv&lt;/code&gt; is your best friend. Appending it like: &lt;code class=&quot;highlighter-rouge&quot;&gt;&lt;span class=&quot;c&quot;&gt;#! /bin/bash -xv&lt;/span&gt;&lt;/code&gt; will activate debugging 
+  and verbose output. Using that I was able to see the very important single quotes 
+  in this output: &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod a+x '~/scripts/testing-executable'&lt;/code&gt;. Since the tilde there is 
+  part of a literal string, Bash wasn’t expanding it to &lt;code class=&quot;highlighter-rouge&quot;&gt;$HOME&lt;/code&gt; like I needed it to. 
+  The NON-&lt;code class=&quot;highlighter-rouge&quot;&gt;-xv&lt;/code&gt; version of the output was simply: &lt;code class=&quot;highlighter-rouge&quot;&gt;chmod: ~/scripts/testing-executable: No such file or directory&lt;/code&gt; 
+  which I unfortunately could not make sense of for a little while :)&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;h3 id=&quot;comments-suggestions-send-me-a-tweet-or-email-or-pull-request-or-postcard&quot;&gt;Comments, suggestions? Send me a tweet or email or pull request or postcard!&lt;/h3&gt;
+
+&lt;div class=&quot;footnotes&quot;&gt;
+  &lt;ol&gt;
+    &lt;li id=&quot;fn:1&quot;&gt;
+      &lt;p&gt;I highly recommend this site to start off: &lt;a href=&quot;http://linuxcommand.org/&quot;&gt;linuxcommand.org&lt;/a&gt; &lt;a href=&quot;#fnref:1&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+    &lt;li id=&quot;fn:2&quot;&gt;
+      &lt;p&gt;a big obvious one that somehow only ocurred to me now is to put the scripts in a &lt;em&gt;folder&lt;/em&gt;. jesus. &lt;a href=&quot;#fnref:2&quot; class=&quot;reversefootnote&quot;&gt;&amp;#8617;&lt;/a&gt;&lt;/p&gt;
+    &lt;/li&gt;
+  &lt;/ol&gt;
+&lt;/div&gt;</content><author><name>Vinney Cavallo</name></author><summary type="html">Or: How I thought I invented the “dotfiles” and “scripts” repo idea… Read on if you like having access to the same command-line tools on different machines.</summary></entry><entry><title type="html">Understanding Recursion</title><link href="http://vcavallo.github.io/ruby/recursion/learning/teaching/cognition/understanding-recursion-via-recursion-understanding/" rel="alternate" type="text/html" title="Understanding Recursion" /><published>2013-10-15T23:09:00-04:00</published><updated>2013-10-15T23:09:00-04:00</updated><id>http://vcavallo.github.io/ruby/recursion/learning/teaching/cognition/understanding-recursion-via-recursion-understanding</id><content type="html" xml:base="http://vcavallo.github.io/ruby/recursion/learning/teaching/cognition/understanding-recursion-via-recursion-understanding/">&lt;p&gt;&lt;img src=&quot;http://vcavallo.github.io/images/google-recursion-smaller.png&quot; alt=&quot;Google search result for 'Recursion'&quot; title=&quot;google result for recursion&quot; /&gt;&lt;/p&gt;
+
+&lt;p&gt;Learn yourself a bit about recursion!&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;h1 id=&quot;understanding-recursion&quot;&gt;Understanding Recursion&lt;/h1&gt;
+
+&lt;p&gt;&lt;em&gt;Recursion&lt;/em&gt;. What’s that? I dunno, should probably Google it….&lt;br /&gt;
+&lt;br /&gt;
+&lt;img src=&quot;http://vcavallo.github.io/images/google-recursion-smaller.png&quot; alt=&quot;Google search result for 'Recursion'&quot; title=&quot;google result for recursion&quot; /&gt;&lt;br /&gt;
+&lt;br /&gt;
+Very funny, Google. (if you don’t understand that joke, you’ll understand it when you understand recursion jokes.) A &lt;a href=&quot;http://en.wikipedia.org/wiki/Recursion&quot;&gt;friendlier web service&lt;/a&gt; starts off this way: “Recursion is the process of repeating items in a self-similar way.” The simplest example I can think of might be a spiral - it sort of goes around and in a little, and then goes around and in a little and goes around and in a little, etc.&lt;br /&gt;
+&lt;br /&gt;
+&lt;img src=&quot;http://vcavallo.github.io/images/spiral.jpg&quot; alt=&quot;A spiral&quot; title=&quot;a spiral&quot; /&gt;&lt;br /&gt;
+&lt;br /&gt;
+Here’s another real-world example that is a little more procedural and will get our brains warmed-up to get fully into some real code:&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;real-world-recursion&quot;&gt;Real-World Recursion&lt;/h2&gt;
+
+&lt;p&gt;You’re in front of a mailbox with these instructions:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;if you are not holding an iPhone in your hand, open the next thing you can.&lt;br /&gt;
+repeat.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Since you have a thing (mailbox) that isn’t an iPhone, you open it and find a shipping box. It’s a thing that isn’t an iPhone so you open it and find an iPhone box. It’s not an iPhone and it’s a thing: you open it and have both an iPhone and a headphones box. You have an iPhone so you stop. Simple enough?&lt;/p&gt;
+
+&lt;p&gt;What if i left out the “if you’re not holding an iPhone” part? Your instructions would be:&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;&lt;em&gt;open the next thing you can.&lt;br /&gt;
+repeat.&lt;/em&gt;&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;You’d have gotten to the iPhone and headphones box part and then opened the next thing you could and you’d have a pair of headphones. Since you’re a good instruction follower, you’d maybe tear the headphones open and have some sort of little speaker in your hand. You’d rip that open and have some other electronics wizardry and keep going - before you know it you’d be &lt;a href=&quot;http://en.wikipedia.org/wiki/Big_Rip&quot;&gt;ripping apart&lt;/a&gt; the fabric of space-time* - and that’s what trying to imagine recursion can feel like if you’re approaching it the wrong way: Like the fabric of your brain is being shredded by a guy on a wild hunt for an iPhone. Well, not &lt;em&gt;specifically&lt;/em&gt; like that, maybe.&lt;br /&gt;
+&amp;lt;/br&amp;gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;getting-closer-to-the-code&quot;&gt;Getting closer to the code…&lt;/h2&gt;
+
+&lt;p&gt;If we were to write the above instructions in psuedocode it might look like this:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;open_thing(thing)
+  if not iPhone, open_thing(next_thing)
+end
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Let’s notice and remember a few important things about the above code.&lt;/p&gt;
+
+&lt;ol&gt;
+  &lt;li&gt;The open_thing method is called inside itself&lt;/li&gt;
+  &lt;li&gt;When it is called within itself, the argument it takes is &lt;em&gt;similar&lt;/em&gt; but not &lt;em&gt;identical&lt;/em&gt; to the argument it takes outside.&lt;/li&gt;
+  &lt;li&gt;There’s an &lt;strong&gt;if&lt;/strong&gt; somewhere&lt;/li&gt;
+&lt;/ol&gt;
+
+&lt;p&gt;You could say it is &lt;strong&gt;repeated in a self-similar manner.&lt;/strong&gt; It doesn’t open the same thing again and again - it opens a &lt;em&gt;next_thing&lt;/em&gt;. So It’s recursive! But in a special way because there’s also that &lt;strong&gt;if&lt;/strong&gt;. The &lt;strong&gt;if&lt;/strong&gt; defines our &lt;em&gt;Base Case&lt;/em&gt;. The thing that tells us to stop recursing. To avoid tearing open the headphones.&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;h3 id=&quot;pause&quot;&gt;Pause&lt;/h3&gt;
+&lt;hr /&gt;
+
+&lt;p&gt;I forgot to tell you why I’m writing this. Recursion can be a bewildering topic for some. Before this post my understanding of it danced around the periphery of the concept. Yea, I knew what it meant and how it generally worked and about fractals and all that, but I couldn’t &lt;em&gt;intuit&lt;/em&gt; the workings of it - and more importantly, relative to my current endeavor: I didn’t get how the heck a computer makes sense of it. I don’t want to take such an interesting, complex and pragmatically useful topic on faith. I want to &lt;em&gt;get&lt;/em&gt; it. If you feel the same way then please read on. I promise your understanding will be different by the end. &lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;h3 id=&quot;back-to-learning&quot;&gt;Back to Learning!&lt;/h3&gt;
+
+&lt;p&gt;As I see it, the typical confusion when thinking about recursion (in terms of programming) comes from two sources:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Poor understanding of how the base case works&lt;/li&gt;
+  &lt;li&gt;Neglecting to visualize how the computer will interpret your code&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;The idea of repeated iteration is not foreign to a programmer. We &lt;code class=&quot;highlighter-rouge&quot;&gt;each&lt;/code&gt;, &lt;code class=&quot;highlighter-rouge&quot;&gt;loop&lt;/code&gt;  all the time (heh). The key is to realize that recursion with a base case is similar to iteration - it’ll stop eventually - and that recursive functions get evaluated exactly the same as any other code.&lt;br /&gt;
+Visuals help and as always: 
+###Understanding is reached by moving methodically in very tiny steps while replacing large complex chunks with smaller, digestible ones 
+So let’s do that!&lt;br /&gt;
+&amp;lt;/br&amp;gt;&lt;/p&gt;
+
+&lt;h2 id=&quot;visuals-examples-graphs-yay&quot;&gt;Visuals, Examples, Graphs, Yay!&lt;/h2&gt;
+
+&lt;p&gt;Here is some Ruby code for a real recursive function that computes the &lt;a href=&quot;http://mathworld.wolfram.com/Factorial.html&quot;&gt;Factorial&lt;/a&gt; of a number:&lt;/p&gt;
+
+&lt;div class=&quot;language-ruby highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+  &lt;span class=&quot;k&quot;&gt;def&lt;/span&gt; &lt;span class=&quot;nf&quot;&gt;factorial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;if&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;==&lt;/span&gt; &lt;span class=&quot;mi&quot;&gt;0&lt;/span&gt;
+      &lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;else&lt;/span&gt;
+      &lt;span class=&quot;n&quot;&gt;number&lt;/span&gt; &lt;span class=&quot;o&quot;&gt;*&lt;/span&gt; &lt;span class=&quot;n&quot;&gt;factorial&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;(&lt;/span&gt;&lt;span class=&quot;n&quot;&gt;number&lt;/span&gt;&lt;span class=&quot;o&quot;&gt;-&lt;/span&gt;&lt;span class=&quot;mi&quot;&gt;1&lt;/span&gt;&lt;span class=&quot;p&quot;&gt;)&lt;/span&gt;
+    &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+  &lt;span class=&quot;k&quot;&gt;end&lt;/span&gt;
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;If you do &lt;code class=&quot;highlighter-rouge&quot;&gt;factorial(5)&lt;/code&gt; you’ll receive &lt;code class=&quot;highlighter-rouge&quot;&gt;120&lt;/code&gt;.&lt;br /&gt;
+Uh, ok I guess that makes sense. But how?&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;WELL I’M GLAD YOU ASKED I’M SO EXCITED TO SHOW YOU!&lt;/strong&gt; (read on)&lt;/p&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Let’s focus on this important line:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;number * factorial(number-1)&lt;/code&gt;&lt;br /&gt;
+When we pass &lt;code class=&quot;highlighter-rouge&quot;&gt;5&lt;/code&gt; into the function, the first thing it hits is the &lt;code class=&quot;highlighter-rouge&quot;&gt;if&lt;/code&gt; block. &lt;code class=&quot;highlighter-rouge&quot;&gt;5&lt;/code&gt; is not equal to &lt;code class=&quot;highlighter-rouge&quot;&gt;0&lt;/code&gt;, so we land in &lt;code class=&quot;highlighter-rouge&quot;&gt;else&lt;/code&gt; - The important line I mentioned above.&lt;/p&gt;
+
+&lt;p&gt;let’s evaluate it from left to right, replacing &lt;code class=&quot;highlighter-rouge&quot;&gt;number&lt;/code&gt; with its value, &lt;code class=&quot;highlighter-rouge&quot;&gt;5&lt;/code&gt;…&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;5 * (factorial(5-1))&lt;/code&gt;&lt;br /&gt;
+and again evaluating further…&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;5 * (factorial(4))&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Well hold on now. &lt;code class=&quot;highlighter-rouge&quot;&gt;factorial(4)&lt;/code&gt; needs it’s own evaluation. Back to the important line above, when we pass &lt;code class=&quot;highlighter-rouge&quot;&gt;4&lt;/code&gt; into &lt;code class=&quot;highlighter-rouge&quot;&gt;factorial(number)&lt;/code&gt; we get:&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;4 * (factorial(4-1))&lt;/code&gt;&lt;br /&gt;
+or&lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;4 * factorial(3)&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;So now altogether we have something like:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;5 * ( 4 * factorial(3)) &lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Likewise, continuing to evaluate the Ruby expression &lt;code class=&quot;highlighter-rouge&quot;&gt;factorial(3)&lt;/code&gt; we arrive at:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;3 * factorial(2) &lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Replacing the expression with this value in our running chain we get:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;5 * ( 4 * ( 3 * factorial(2)))&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Following the trend of evaluation…&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;5 * ( 4 * ( 3 * ( 2 * factorial(1))))&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;…and one more time:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;5 * ( 4 * ( 3 * ( 2 * ( 1 * factorial(0)))))&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Hang on, something is different now. Look back up to the full method. Evaluating &lt;code class=&quot;highlighter-rouge&quot;&gt;factorial(0)&lt;/code&gt; will land us in the &lt;code class=&quot;highlighter-rouge&quot;&gt;if&lt;/code&gt; rather than the &lt;code class=&quot;highlighter-rouge&quot;&gt;else&lt;/code&gt; part of the block. This part returns the value &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;, &lt;em&gt;not&lt;/em&gt; another call to the &lt;code class=&quot;highlighter-rouge&quot;&gt;factorial &lt;/code&gt; method! Let’s replace that nice gentle number into our chain:&lt;/p&gt;
+
+&lt;p&gt;&lt;code class=&quot;highlighter-rouge&quot;&gt;5 * ( 4 * ( 3 * ( 2 * ( 1 * ( 1 )))))&lt;/code&gt;&lt;/p&gt;
+
+&lt;p&gt;Every time we get a bundled-up expression rather than a nice, unpacked, &lt;em&gt;math-able&lt;/em&gt; return value, we’re going to continue interpreting and replacing until we end up with something upon which we can do arithmetic.&lt;/p&gt;
+
+&lt;h2 id=&quot;interpret-o-vision&quot;&gt;Interpret-O-Vision&lt;/h2&gt;
+
+&lt;p&gt;This is a dense topic and it can never hurt to be &lt;strong&gt;more clear&lt;/strong&gt; - &lt;em&gt;a small confusion will recursively grow larger with no base case in sight!&lt;/em&gt; - so let’s make it a little more visually-appealing.&lt;br /&gt;
+Here’s stepping through &lt;code class=&quot;highlighter-rouge&quot;&gt;factorial(5)&lt;/code&gt; like an interpreter..&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;
+factorial(5) =&amp;gt; is 5 == 0 ? no. return 5 * factorial(4) 
+    factorial(4) =&amp;gt; is 4 == 0 ? no. return 4 * factorial(3)
+        factorial(3) =&amp;gt; is 3 == 0 ? no. return 3 * factorial(2)
+            factorial(2) =&amp;gt; is 2 == 0 ? no. return 2 * factorial(1)
+                factorial(1) =&amp;gt; is 1 == 0 ? no. return 1 * factorial(0)
+                    factorial(0) =&amp;gt; is 0 == 0 ? yes! return 1
+                    finally, nothing else to evaluate. we landed on a number.
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+&lt;p&gt;&lt;em&gt;(I’m going to beat this into your/our head/s)&lt;/em&gt;&lt;/p&gt;
+
+&lt;p&gt;Now that we know that &lt;code class=&quot;highlighter-rouge&quot;&gt;factorial(0)&lt;/code&gt; returns &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;, we can go up the stack and replace &lt;code class=&quot;highlighter-rouge&quot;&gt;factorial(0)&lt;/code&gt; with &lt;code class=&quot;highlighter-rouge&quot;&gt;1&lt;/code&gt;:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;factorial(1) =&amp;gt; return 1 * factorial(0) 
+factorial(1) =&amp;gt; return 1 * (1)
+factorial(1) =&amp;gt; return 1
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Pop that back up a level in the Interpret-O-Vision, look for an expression for which you know the return value and substitute it…&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;factorial(2) =&amp;gt; return 2 * factorial(1)
+factorial(2) =&amp;gt; return 2 * (1)
+factorial(2) =&amp;gt; return 2
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Up a level again:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;factorial(3) =&amp;gt; return 3 * factorial(2)
+factorial(3) =&amp;gt; return 3 * (2)
+factorial(3) =&amp;gt; return 6
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;…&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;factorial(4) =&amp;gt; return 4 * factorial(3)
+factorial(4) =&amp;gt; return 4 * (6)
+factorial(4) =&amp;gt; return 24
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;Last one!&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;factorial(5) =&amp;gt; return 5 * factorial(4)
+factorial(5) =&amp;gt; return 5 * (24)
+factorial(5) =&amp;gt; return 120
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;And there we have it. &lt;code class=&quot;highlighter-rouge&quot;&gt;factorial(5)&lt;/code&gt; returns &lt;code class=&quot;highlighter-rouge&quot;&gt;120&lt;/code&gt; !&lt;/p&gt;
+
+&lt;h2 id=&quot;did-somebody-order-dominoes&quot;&gt;“Did Somebody Order Dominoes?””&lt;/h2&gt;
+
+&lt;p&gt;To really drive the point home in a beautiful pure number cascade. This is sort of what happens when the interpreter reaches the base case and can begin returning and &lt;em&gt;mathing&lt;/em&gt; on values:&lt;/p&gt;
+
+&lt;div class=&quot;highlighter-rouge&quot;&gt;&lt;div class=&quot;highlight&quot;&gt;&lt;pre class=&quot;highlight&quot;&gt;&lt;code&gt;5 * ( 4 * ( 3 * ( 2 * ( 1 * ( 1 )))))   
+5 * ( 4 * ( 3 * ( 2 * ( 1 * 1 )))))  
+5 * ( 4 * ( 3 * ( 2 * ( 1 ))))
+5 * ( 4 * ( 3 * ( 2 * 1 )))
+5 * ( 4 * ( 3 * ( 2 )))
+5 * ( 4 * ( 3 * 2 ))
+5 * ( 4 * ( 6 ))
+5 * ( 4 * 6 )
+5 * ( 24 )
+5 * 24
+120
+&lt;/code&gt;&lt;/pre&gt;&lt;/div&gt;&lt;/div&gt;
+
+&lt;p&gt;&lt;em&gt;It’s beautiful&lt;/em&gt;. When the interpreter can finally stop recursing and start returning, the big stack of self-similar calls falls back into itself like an imploding building. Finite recursion, while dense, is not entirely elusive. It’s &lt;em&gt;infinite&lt;/em&gt; recursion that is impossible to imagine (you think you’re imagining it right now but you’re merely imagining an infinitely small portion of it.)&lt;/p&gt;
+
+&lt;p&gt;##Recursion is Fundamental to our Species
+Maybe you’re sitting there thinking,&lt;/p&gt;
+&lt;blockquote&gt;
+  &lt;p&gt;Duh… computers are stupid. This is boring.&lt;/p&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;That’s ok! Recursion is still a really cool concept and has connections to biology and other parts of the natural world. Do you think humans am stupid, too? &lt;a href=&quot;http://www.edge.org/conversation/recursion-and-human-thought&quot;&gt;There&lt;/a&gt; are &lt;a href=&quot;http://press.princeton.edu/titles/9424.html&quot;&gt;theories&lt;/a&gt; that recursion is an integral part of what elevates human cognitive abilities above other non-human animals.&lt;br /&gt;
+You can sort of see this yourself: (&lt;a href=&quot;http://en.wikipedia.org/wiki/Solipsism&quot;&gt;solipsists&lt;/a&gt;, look away now) &lt;em&gt;I know that you’re thinking and I know that you know that I know it.&lt;/em&gt;&lt;br /&gt;
+What is that if not a self-similar repetition?! Don’t take for granted the fact that you can imagine that very complex relationship with ease. I love my cat, but there’s no way that he knows that I know that he’s a cat. In his head it’s all just like, &lt;em&gt;“cat cat cat cat cat”&lt;/em&gt;. &lt;br /&gt;
+(I just tried to imagine his imagining without a base case to rescue me and almost got stuck in his head!)&lt;/p&gt;
+
+&lt;p&gt;It only takes a small stretch of imagination to entertain the idea that our ability to recursively model other minds is at the root of our capacity for &lt;em&gt;empathy&lt;/em&gt;. That is &lt;strong&gt;cool.&lt;/strong&gt;&lt;br /&gt;
+&lt;br /&gt;&lt;/p&gt;
+
+&lt;hr /&gt;
+&lt;p&gt;* &lt;em&gt;Ripping Spacetime&lt;/em&gt;, pretty awesome speed metal band name?&lt;/p&gt;</content><author><name>Vinney Cavallo</name></author><summary type="html">Learn yourself a bit about recursion!</summary></entry><entry><title type="html">Overview Test-Driven Development</title><link href="http://vcavallo.github.io/presentations/tdd/tes-driven/development/rspec/speakerdeck/test-driven-development-presentation-review/" rel="alternate" type="text/html" title="Overview Test-Driven Development" /><published>2013-10-07T21:52:00-04:00</published><updated>2013-10-07T21:52:00-04:00</updated><id>http://vcavallo.github.io/presentations/tdd/tes-driven/development/rspec/speakerdeck/test-driven-development-presentation-review</id><content type="html" xml:base="http://vcavallo.github.io/presentations/tdd/tes-driven/development/rspec/speakerdeck/test-driven-development-presentation-review/">&lt;p&gt;A little overview of TDD, written at a time when I had just learned about it myself.&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;Earlier tonight I was flipping through &lt;a href=&quot;https://github.com/jarhart&quot;&gt;Jason Arhart&lt;/a&gt;’s &lt;a href=&quot;https://speakerdeck.com/lvrug/introduction-to-tdd-jason-arhart&quot;&gt;Speakerdeck presentation&lt;/a&gt; on the basics of Test-Driven Development and giving a little thought to the topic in general.&lt;br /&gt;
+For starters:&lt;/p&gt;
+
+&lt;h3 id=&quot;a-little-overview-of-tdd&quot;&gt;A little overview of TDD&lt;/h3&gt;
+
+&lt;p&gt;TDD is a system in which you create a suite of tests to ensure your code stays in line during development. It takes advantage of a few truisms that surround programming:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;Repetition is key to testing&lt;/li&gt;
+  &lt;li&gt;Computers are good at repetition&lt;/li&gt;
+  &lt;li&gt;&lt;del&gt;Humans&lt;/del&gt; Programmers like automating repetitive tasks&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“Why use TDD instead of whatever it is I normally do?”&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;You, sounding a bit silly.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;Well, see what you said there? The second part of the sentence? You most likely have a general plan for your code, write a little, play with it and see if it breaks, write a little more, etc. Before you know it you’ve got a whole bunch of code, testing it becomes cumbersome and your test coverage starts to get a little spotty. Worst of all, you don’t know when you’re missing something. - That is, until something breaks a little later.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“Ok, I guess that doesn’t sound so smart. What’s this thing you’re talking about?”&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;You again, wising up.&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;This thing is &lt;strong&gt;&lt;a href=&quot;http://en.wikipedia.org/wiki/Test-driven_development&quot;&gt;test-first development&lt;/a&gt;&lt;/strong&gt;. Before you write a line of production code, you’re going to write at least one (failing, for now) test that describes what your program &lt;em&gt;should&lt;/em&gt; do when it’s working properly. By keeping the end goal in your sights you minimize the risk of diluting your focus throughout the coding process.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;You start with a failing test and then write only enough code to make it pass&lt;/li&gt;
+  &lt;li&gt;Then you write some more tests (a bunch, if you like) and write only enough code to make each of those tests pass, in order.
+    &lt;ul&gt;
+      &lt;li&gt;(check out the &lt;code class=&quot;highlighter-rouge&quot;&gt;--fail-fast&lt;/code&gt; flag, when the time is right).&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;All of this careful attention to the intended end result has an added bonus, as if having working code isn’t pleasant enough: Refactoring is safer and more fun. The adage goes:&lt;/p&gt;
+
+&lt;h2 id=&quot;red--green--refactor&quot;&gt;&lt;span style=&quot;color:red&quot;&gt;Red&lt;/span&gt; | &lt;span style=&quot;color:green&quot;&gt;Green&lt;/span&gt; | &lt;span style=&quot;color:blue&quot;&gt;Refactor&lt;/span&gt;&lt;/h2&gt;
+
+&lt;p&gt;And then &lt;strong&gt;[repeat]&lt;/strong&gt;. Once you’ve got passing tests, refactor, look out for red (make it pass again) and continue. Never refactor unless all your tests pass.&lt;br /&gt;
+It nicely echoes &lt;a href=&quot;http://en.wikipedia.org/wiki/Kent_Beck&quot;&gt;Kent Beck&lt;/a&gt;’s “Make it Work, Make it Right, Make it Fast”.&lt;/p&gt;
+
+&lt;blockquote&gt;
+  &lt;p&gt;“That sounds great! Aren’t there any downsides, though?”&lt;/p&gt;
+  &lt;ul&gt;
+    &lt;li&gt;You, bringing up a good point…&lt;/li&gt;
+  &lt;/ul&gt;
+&lt;/blockquote&gt;
+
+&lt;p&gt;&lt;strong&gt;“Sure”&lt;/strong&gt;. is the answer. &lt;strong&gt;“False Positives”&lt;/strong&gt; is one elaboration of that answer. There is no clear way to test &lt;em&gt;the tests&lt;/em&gt;, aside from being really careful and diligent when writing them - but even then there are bound to be mistakes sometimes. That’s the whole reason you write tests to begin with: to account for your mistakes or normal human inability to complete every complex task with 100% accuracy on the first try.&lt;br /&gt;
+Another pitfall is the tendency to veer towards &lt;a href=&quot;http://en.wikipedia.org/wiki/Happy_path&quot;&gt;The Happy Path&lt;/a&gt; whenever possible. Your tests are only as good as your natural or tailored skepticism. Doubt yourself often and rigidly.&lt;/p&gt;
+
+&lt;h2 id=&quot;a-final-thought-that-intrigues-me&quot;&gt;A final thought that intrigues me&lt;/h2&gt;
+
+&lt;p&gt;…in the context of TDD. Looking at a full suite of tests with its &lt;br /&gt;
+&lt;code class=&quot;highlighter-rouge&quot;&gt;such-and-such method should do this-thing&lt;/code&gt;&lt;br /&gt;
+evokes a curious idea… &lt;em&gt;Yes, that method should do that thing. Why should I have to tell it how?&lt;/em&gt; It seems like having a computer figure out how some not-yet-written code should behave based on some simple human-readable instruction is the next logical step in the process. As a programmer, you switch gears from “Test-Designer Overlord” to “Code Implementer Monkey” during the TDD process. Doesn’t the former sound more human and the latter more machinated? The same way an automatic transmission knows to shift when we want the car to drive at a certain speed, how long do we have to wait until an interpreter knows how to write a method, given some discrete instructions? Uh oh, sounds like some(many thousand)one would be out of a job!&lt;/p&gt;
+
+&lt;h2 id=&quot;further-tdd-reading&quot;&gt;Further TDD Reading?&lt;/h2&gt;
+&lt;p&gt;Check &lt;a href=&quot;http://betterspecs.org/&quot;&gt;This&lt;/a&gt; out.&lt;/p&gt;</content><author><name>Vinney Cavallo</name></author><summary type="html">A little overview of TDD, written at a time when I had just learned about it myself.</summary></entry></feed>
