@@ -30,7 +30,6 @@ realizing the truth of that fact is all that is necessary to chase away any
 significant aspects of the Impostor Syndrome feeling. Briefly,
 
 >**If everyone is an impostor, then no one is.**
-<br>
 
 ## Step up and admit your shortcomings here:
 
