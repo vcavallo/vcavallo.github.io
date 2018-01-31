@@ -4,7 +4,6 @@ title: "TBD working title about one-dimensional task lists"
 date: 2017-10-18 15:57
 comments: true
 categories: workflow process quickies
-published: false
 ---
 
 [ TK Drawing of multi-dimensional task list ]
