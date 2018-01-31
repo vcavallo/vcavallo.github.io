@@ -36,8 +36,6 @@ navigation:
   - text: About
     url: /about
 
-permalink: /:categories/:title/
-
 social:
   - service: github
     username: vcavallo
