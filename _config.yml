@@ -19,19 +19,24 @@ description: This is a place where Vinney Cavallo writes things about programmin
 baseurl: "" # the subpath of your site, e.g. /blog
 url: http://vcavallo.github.io
 your_name: Vinney Cavallo
+author: Vinney Cavallo # TODO include this in readme
 
 subtitle: Vinney Cavallo && Doing Things With Data.
 
 show_excerpts: true
+custom_styles: true
 
 header_pages:
   - about.md
 
+navigation_menu_heading: Stack Undertow
 navigation:
   - text: Home
     url: /
   - text: About
     url: /about
+
+permalink: /:categories/:title/
 
 social:
   - service: github

@@ -23,13 +23,11 @@ Centering a vim pane within a full-screen terminal window is really nice when fo
 
 <!--more-->
 
-# How to center a pane in vim
-
 ## TL;DR:  
 
 ![Centering animation](/images/vim-center-pane.gif)
 
-###[link to gist](https://gist.github.com/vcavallo/c3147fca261c78bd9c4a3648089b22e8#file-vim-centerpane)
+[vimscript gist](https://gist.github.com/vcavallo/c3147fca261c78bd9c4a3648089b22e8#file-vim-centerpane)
 
 The idea is to get the _content_ visually centered on the screen.  Typically
 when I am writing non-code text I still use vim - because it's fantastic no

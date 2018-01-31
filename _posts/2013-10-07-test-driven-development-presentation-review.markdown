@@ -1,6 +1,6 @@
 ---
 layout: post
-title: "Test-Driven Development"
+title: "Overview Test-Driven Development"
 date: 2013-10-07 21:52
 comments: true
 categories: presentations tdd tes-driven development rspec speakerdeck
@@ -11,8 +11,6 @@ A little overview of TDD, written at a time when I had just learned about it mys
 
 <!--more-->
 
-# Overview of Test-Driven Development
-
 Earlier tonight I was flipping through [Jason Arhart](https://github.com/jarhart)'s [Speakerdeck presentation](https://speakerdeck.com/lvrug/introduction-to-tdd-jason-arhart) on the basics of Test-Driven Development and giving a little thought to the topic in general.  
 For starters:
 
@@ -22,7 +20,7 @@ TDD is a system in which you create a suite of tests to ensure your code stays i
 
 - Repetition is key to testing
 - Computers are good at repetition
-- <s>Humans</s> Programmers like automating repetitive tasks
+- ~~Humans~~ Programmers like automating repetitive tasks
 
 > "Why use TDD instead of whatever it is I normally do?"  
 > - You, sounding a bit silly.
@@ -52,7 +50,7 @@ It nicely echoes [Kent Beck](http://en.wikipedia.org/wiki/Kent_Beck)'s "Make it 
 **"Sure"**. is the answer. **"False Positives"** is one elaboration of that answer. There is no clear way to test *the tests*, aside from being really careful and diligent when writing them - but even then there are bound to be mistakes sometimes. That's the whole reason you write tests to begin with: to account for your mistakes or normal human inability to complete every complex task with 100% accuracy on the first try.  
 Another pitfall is the tendency to veer towards [The Happy Path](http://en.wikipedia.org/wiki/Happy_path) whenever possible. Your tests are only as good as your natural or tailored skepticism. Doubt yourself often and rigidly.
 
-## *A final thought that intrigues me* 
+## A final thought that intrigues me
 
 ...in the context of TDD. Looking at a full suite of tests with its   
 `such-and-such method should do this-thing`  

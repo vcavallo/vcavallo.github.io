@@ -18,7 +18,7 @@ I'm a big fan of the [Middleman](https://middlemanapp.com/) static site generato
 
 - My consultancy's site, [exnil.io](http://exnil.io) is built on Middleman.
 - [My personal blog](http://blog.vinneycavallo.com/) is built on [Jekyll](https://jekyllrb.com/) - a sort of cousin to Middleman.
-- And this site you're reading is [Octopress](http://octopress.org/), a kinda defunct Jekyll nephew.
+- And this site you're reading is [Octopress](http://octopress.org/), a kinda defunct Jekyll nephew. (used to be Octopress... Migrated to Jekyll in 2018)
 
 
 Lately I've been drinking the **utility-first CSS** kool-aid with glee. As others before me have also noted, [Adam Wathan's blog post](https://adamwathan.me/css-utility-classes-and-separation-of-concerns/) makes the argument quite well, so I won't get into my reasons here. Since I just mentioned Adam, it won't be a surprise that my utility-centric CSS framework of choice at the moment is [Tailwind CSS](https://tailwindcss.com/), which he co-created (or "_is currently co-creating_" since they are currently hard at work on the road to 1.0. And really when can the creation of any piece of software be in the _past tense_?)
