@@ -1,7 +1,8 @@
-PATH
-  remote: /Users/vinney/development/experiments/jekyll-hackcss
+GIT
+  remote: git@github.com:vcavallo/jekyll-hackcss.git
+  revision: 59a990a0a41a939d3406dc29238abcb9e911f84f
   specs:
-    jekyll-hackcss (0.1.2)
+    jekyll-hackcss (0.1.1)
       jekyll (~> 3.6)
       jekyll-seo-tag (~> 2.0)
 
@@ -30,7 +31,7 @@ GEM
       jekyll (~> 3.3)
     jekyll-sass-converter (1.5.0)
       sass (~> 3.4)
-    jekyll-seo-tag (2.3.0)
+    jekyll-seo-tag (2.4.0)
       jekyll (~> 3.3)
     jekyll-watch (1.5.1)
       listen (~> 3.0)
@@ -62,7 +63,6 @@ DEPENDENCIES
   jekyll-compose
   jekyll-feed (~> 0.6)
   jekyll-hackcss!
-  tzinfo-data
 
 BUNDLED WITH
-   1.16.0
+   1.16.1
