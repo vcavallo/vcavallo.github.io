@@ -86,6 +86,112 @@
     <li>
       <h3>
         
+        <span>Jun 15, 2018</span>
+        <a href="/2018/06/15/remote-dev-machine-webpack-dev-server-nginx.html">
+          remote dev machine webpack-dev-server nginx
+        </a>
+      </h3>
+      
+        <p>I spent hours and hours and purpled all google searches I could think of. sometimes after spiraling around I’d come back around to the same google searches but this time I’d have a different working situation as a result of walking through <em>other</em> google search results so I’d try some of these things mixed in with weird combinations of other stuff I’d already tried. A salad of port, host, webserver combinations.<br />
+I think the remote dev vps approach is relatively uncommon and even less common among front end developers who are mostly lurking around javascript and webpack stack overflow answers.</p>
+
+<p>This gist has the instructions: https://gist.github.com/vcavallo/4f11985c4364bc4edfdf56556bff4ccf</p>
+
+<p>The satisfaction of finally getting it working is hugely rewarding.</p>
+
+<p>Another post needed about the Rails + Webpacker solution. here’s the gist for that: https://gist.github.com/vcavallo/22cac63d01e3b73a56a92a619c6ff698</p>
+
+
+      
+    </li>
+    
+    <li>
+      <h3>
+        
+        <span>Jun 15, 2018</span>
+        <a href="/2018/06/15/debugging-rspec-tests-that-are-leaky-and-break-other-tests.html">
+          debugging rspec tests that are leaky and break other tests
+        </a>
+      </h3>
+      
+        <p>This would be the excerpt</p>
+
+<!-- more -->
+
+<p>on cobbler concierge right now some tests seem to leak their db data into other tests
+(which is maddening because i’m using database cleaner!!) in order to troubleshoot it
+i can’t just run the failing tests on their own, because they pass that way… i need
+to find a troublesome test and then try a all the other tests in front of it.. i’m
+writing a ruby script to do just that.</p>
+
+<p>useful for skipping all remaining tests after a failure - in place of –fail-fast i guess?</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  before :all do
+    $continue = true
+  end
+
+  around :each do |example|
+    if $continue
+      $continue = false
+      example.run
+      $continue = true unless example.exception
+    else
+      example.skip
+    end
+  end
+</code></pre></div></div>
+
+<p>useful for checking state (like db) after each test - i once found some leftover data
+even though DatabaseCleaner was supposed to be running.
+somehow the above issue was related to <code class="highlighter-rouge">around(:each)</code> usage in tests for some fucky reason
+i never figured out.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  around(:each) do |ex|
+		if codes.any?
+			puts "******* there are partner codesssssssssssssssssssssssssssssssssssssssssssssssssss!@!!!!"
+			puts "*** codes: { codes }"
+			fail
+		elsif codes.include?("tx1")
+			puts "*********** wtf there is a tx1 fkfkfkfkkfkfkfkkfkfkkfkfkfkf"
+			puts "*** codes: { codes }"
+			fail
+		end
+	end
+</code></pre></div></div>
+
+
+      
+    </li>
+    
+    <li>
+      <h3>
+        
+        <span>Mar 8, 2018</span>
+        <a href="/2018/03/08/using-watch-to-help-with-git-management.html">
+          using watch to help with git management
+        </a>
+      </h3>
+      
+        <p>watch –color git l –color in one pane, do git things in the next pane</p>
+
+      
+    </li>
+    
+    <li>
+      <h3>
+        
+        <span>Feb 10, 2018</span>
+        <a href="/2018/02/10/server-side-image-uploads-to-cloudinary-with-rails-and-vue-js.html">
+          server-side image uploads to cloudinary with rails and vue js
+        </a>
+      </h3>
+      
+        <p><code class="highlighter-rouge">castfolio-rails</code> vue talent headshot image uploader</p>
+
+      
+    </li>
+    
+    <li>
+      <h3>
+        
         <span>Jan 31, 2018</span>
         <a href="/2018/01/31/creating-a-jekyll-theme-gem-for-github-pages.html">
           Creating A Jekyll Theme Gem For GitHub Pages

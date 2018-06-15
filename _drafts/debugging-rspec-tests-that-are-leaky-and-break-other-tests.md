@@ -1,7 +1,12 @@
 ---
 layout: post
 title: debugging rspec tests that are leaky and break other tests
+excerpted: true
 ---
+
+This would be the excerpt
+
+<!-- more -->
 
 on cobbler concierge right now some tests seem to leak their db data into other tests
 (which is maddening because i'm using database cleaner!!) in order to troubleshoot it
