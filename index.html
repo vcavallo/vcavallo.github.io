@@ -87,8 +87,8 @@
       <h3>
         
         <span>Jun 27, 2018</span>
-        <a href="/2018/06/27/remote-dev-machine-webpack-dev-server-nginx.html">
-          remote dev machine webpack-dev-server nginx
+        <a href="/how_to/webpack/vps/front_end/2018/06/27/remote-dev-machine-webpack-dev-server-nginx.html">
+          Using webpack-dev-server and HMR on a Remote Machine/VPS
         </a>
       </h3>
       
@@ -98,19 +98,65 @@
 
 <h2 id="the-fluffy-backstory">The Fluffy Backstory</h2>
 
-<p>The joys of livereloading, hot module replacement, instant style updates and their related, rapid relatives have only recently come into focus for me. Now that I’ve seen this dazzling light the idea of toiling away in a dark alley of constantly <code class="highlighter-rouge">Ctrl-R</code>ing a browser window makes me <a href="javascript:void(0)" title="TODO: This will be a post about workflow 'friction'">very miserable</a>. I’ve recently adopted a workflow that involves working on a remote, hosted VPS over <code class="highlighter-rouge">SSH</code> in the terminal. I love almost all the <a href="javascript:void(0)" title="TODO: This will be a post about my dev VPS workflow">things about it</a>, but it briefly pushed me down the dark <code class="highlighter-rouge">Ctrl-R</code> alley. Remedy below.</p>
+<p>The joys of livereloading, hot module replacement, instant style updates and their related, rapid relatives have only recently come into focus for me. Now that I’ve seen this dazzling light the idea of toiling away in a dark alley of constantly <code class="highlighter-rouge">Ctrl-R</code>ing a browser window makes me <a href="javascript:void(0)" title="TODO: This will be a post about workflow 'friction'">very miserable</a>. I’ve recently adopted a workflow that involves working on a remote, hosted VPS over <code class="highlighter-rouge">SSH</code> in the terminal. I love almost all the <a href="javascript:void(0)" title="TODO: This will be a post about my dev VPS workflow">things about it</a>, but it briefly pushed me down the dark <code class="highlighter-rouge">Ctrl-R</code> alley. The main reason is simple: You’re no longer hitting a <code class="highlighter-rouge">localhost:NNNN</code> page anymore - instead you’re going out over the internet.</p>
 
-<p>I spent hours and hours and purpled all google searches I could think of. sometimes after spiraling around I’d come back around to the same google searches but this time I’d have a different working situation as a result of walking through <em>other</em> google search results so I’d try some of these things mixed in with weird combinations of other stuff I’d already tried. A salad of port, host, webserver combinations.<br />
-I think the remote dev vps approach is relatively uncommon and even less common among front end developers who are mostly lurking around javascript and webpack stack overflow answers.</p>
+<p>There are a few issues:</p>
+
+<ul>
+  <li>On-Disk vs In-Memory builds of the site</li>
+  <li>Hosts and DNS</li>
+  <li>Ports (who uses which ports, who knows this, how to tell the various parties what’s where)</li>
+  <li>Firewalls</li>
+  <li>Things about HTML headers</li>
+  <li>Things about websockets</li>
+</ul>
+
+<p>I spent hours and hours and purpled all google searches I could think of. sometimes after spiraling around I’d come back around to older google search results but this time I’d have a different set of configuration combinations as a result of walking through <em>previous</em> google search results so I’d try some of these things mixed in with weird combinations of other stuff I’d already tried.<br />
+It was one big shitty salad of port, host, webserver combinations.</p>
+
+<p>By the end, the viable solution is, in summary, this:</p>
+
+<ul>
+  <li>A publicly-accessible URL (let’s call it <code class="highlighter-rouge">http://devenv.com</code>. and I already checked, it’s taken) with DNS records pointing this domain to the IP of the VPS we’re working off of.</li>
+  <li>A static-built version of the files at <code class="highlighter-rouge">/dist</code>, served up by a simple nginx server block pointed to the static <code class="highlighter-rouge">index.html</code> when navigating to <code class="highlighter-rouge">http://devenv.com</code>.</li>
+  <li>webpack-dev-server running, serving an in-memory version of the site over local port <code class="highlighter-rouge">8080</code>.
+    <ul>
+      <li>another nginx server block <em>using a subdomain such as</em> <code class="highlighter-rouge">http://live-and-hmr.devenv.com</code> which proxies the websocket connection over to the above webpack-dev-server process on <code class="highlighter-rouge">8080</code>.</li>
+    </ul>
+  </li>
+</ul>
+
+<p>What I didn’t understand originally was that webpack-dev-server <strong>is a server</strong> (duh) and as a result nginx should not be <em>doing the serving</em> of that resource. It merely needs to step aside and hand off the responsibility to webpack-dev-server. This tripped me up, conceptually, before it clicked and prevented me from reasoning properly enough about the solution in order to arrive at it earlier.</p>
+
+<p>One wouldn’t have to use the two URLs (with and without the subdomain going to the static and dev-server versions) but I found it convenient to be able to work off the HMR dev-server version 90% of the time while keeping the convenience of building the site and flipping over to the static tab for a sort of more <code class="highlighter-rouge">productiony</code> experience.</p>
+
+<p>I thought a bit about why there were so few Stack Overflow posts or blog article about this solution and I arrived at: The remote dev vps approach is relatively uncommon and it may be even less common among front end developers. This is a bit of an assumption and maybe a rude-ish one, but one which is grounded by this bias: Front-end-mostly devs are more likely to be spending their valuable time working on javascript/webpack/gulp/styling workflows, etc. - all of which are noble pursuits and beautiful, but its easy to spend much of your time in that world without having to worry about hosting details, nginx, processes/ports, and the like.<br />
+To be clear, this is not a value judgement. Quite the contrary; being a mostly-back-end-developer myself I started off with very little knowledge on the front end challenges listed above and I have a lot of respect for those who know this stuff inside and out.<br />
+It has been a long and rewarding journey for me.</p>
 
 <h2 id="the-solution">The Solution</h2>
 
-<p>This gist has the instructions: https://gist.github.com/vcavallo/4f11985c4364bc4edfdf56556bff4ccf</p>
+<p>Enough of my yakking! When I finally got the thing working I hastily noted it all down in a GitHub Gist (after doing a lot of wild, expletive-laced celebratory gesturing). The Gist will likely make enough sense to someone well-versed in webpack and its configuring, but I don’t know that its the clearest thing. Let me know if you have questions.</p>
 
-<p>The satisfaction of finally getting it working is hugely rewarding.</p>
+<ul>
+  <li><a href="https://gist.github.com/vcavallo/4f11985c4364bc4edfdf56556bff4ccf">Link to gist</a></li>
+  <li>Embed:</li>
+</ul>
+<noscript><pre>400: Invalid request
+</pre></noscript>
+<script src="https://gist.github.com/4f11985c4364bc4edfdf56556bff4ccf.js"> </script>
 
-<p>Another post needed about the Rails + Webpacker solution. here’s the gist for that: https://gist.github.com/vcavallo/22cac63d01e3b73a56a92a619c6ff698</p>
+<h2 id="bonus-for-rails--webpacker-users">Bonus for Rails + Webpacker users</h2>
 
+<p>There’s another post forthcoming on Rails + Webpacker over VPS, but for now here’s another hastily-written gist with the solution for that setup (warning: it’s <em>weirder</em>):</p>
+
+<ul>
+  <li><a href="https://gist.github.com/vcavallo/22cac63d01e3b73a56a92a619c6ff698">Link to gist</a></li>
+</ul>
+
+<hr />
+
+<p>Questions, comments, concerns and ridicule all welcome below!</p>
 
       
     </li>
