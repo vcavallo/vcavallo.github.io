@@ -1,4 +1,72 @@
-<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-27T12:45:00-04:00</updated><id>http://localhost:4000/</id><title type="html">Stack Undertow</title><subtitle>This is a place where Vinney Cavallo writes things about programming and other technical stuff</subtitle><author><name>Vinney Cavallo</name></author><entry><title type="html">Setting up Middleman and Tailwind CSS</title><link href="http://localhost:4000/css/static_site_generator/how_to/2017/12/06/setting-up-middleman-with-tailwind-css.html" rel="alternate" type="text/html" title="Setting up Middleman and Tailwind CSS" /><published>2017-12-06T16:16:00-05:00</published><updated>2017-12-06T16:16:00-05:00</updated><id>http://localhost:4000/css/static_site_generator/how_to/2017/12/06/setting-up-middleman-with-tailwind-css</id><content type="html" xml:base="http://localhost:4000/css/static_site_generator/how_to/2017/12/06/setting-up-middleman-with-tailwind-css.html">&lt;p&gt;Middleman and Tailwind make landing pages a breeze (get it?). Here’s how to get them to work together!&lt;/p&gt;
+<?xml version="1.0" encoding="utf-8"?><feed xmlns="http://www.w3.org/2005/Atom" ><generator uri="https://jekyllrb.com/" version="3.6.2">Jekyll</generator><link href="http://localhost:4000/feed.xml" rel="self" type="application/atom+xml" /><link href="http://localhost:4000/" rel="alternate" type="text/html" /><updated>2018-06-27T12:50:36-04:00</updated><id>http://localhost:4000/</id><title type="html">Stack Undertow</title><subtitle>This is a place where Vinney Cavallo writes things about programming and other technical stuff</subtitle><author><name>Vinney Cavallo</name></author><entry><title type="html">Using webpack-dev-server and HMR on a Remote Machine/VPS</title><link href="http://localhost:4000/how_to/webpack/vps/front_end/2018/06/27/remote-dev-machine-webpack-dev-server-nginx.html" rel="alternate" type="text/html" title="Using webpack-dev-server and HMR on a Remote Machine/VPS" /><published>2018-06-27T00:00:00-04:00</published><updated>2018-06-27T00:00:00-04:00</updated><id>http://localhost:4000/how_to/webpack/vps/front_end/2018/06/27/remote-dev-machine-webpack-dev-server-nginx</id><content type="html" xml:base="http://localhost:4000/how_to/webpack/vps/front_end/2018/06/27/remote-dev-machine-webpack-dev-server-nginx.html">&lt;p&gt;&lt;em&gt;Setting up&lt;/em&gt; webpack-dev-server HMR on a remote machine to work over nginx isn’t fun - but &lt;strong&gt;USING IT IS!&lt;/strong&gt;&lt;/p&gt;
+
+&lt;!--more--&gt;
+
+&lt;p&gt;&lt;strong&gt;The Problem:&lt;/strong&gt; Using &lt;code class=&quot;highlighter-rouge&quot;&gt;webpack-dev-server&lt;/code&gt;’s livereloading and HMR features on a remote machine (probably over nginx)&lt;/p&gt;
+
+&lt;p&gt;&lt;strong&gt;&lt;a href=&quot;#the-solution&quot;&gt;The Solution&lt;/a&gt;&lt;/strong&gt; is further down on this page for the impatient &lt;em&gt;(or those who very reasonably don’t care to read about how I got into this situation and how long it took me to solve it!)&lt;/em&gt;.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-fluffy-backstory&quot;&gt;The Fluffy Backstory&lt;/h2&gt;
+
+&lt;p&gt;The joys of livereloading, hot module replacement, instant style updates and their related, rapid relatives have only recently come into focus for me. Now that I’ve seen this dazzling light the idea of toiling away in a dark alley of constantly &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl-R&lt;/code&gt;ing a browser window makes me &lt;a href=&quot;javascript:void(0)&quot; title=&quot;TODO: This will be a post about workflow 'friction'&quot;&gt;very miserable&lt;/a&gt;. I’ve recently adopted a workflow that involves working on a remote, hosted VPS over &lt;code class=&quot;highlighter-rouge&quot;&gt;SSH&lt;/code&gt; in the terminal. I love almost all the &lt;a href=&quot;javascript:void(0)&quot; title=&quot;TODO: This will be a post about my dev VPS workflow&quot;&gt;things about it&lt;/a&gt;, but it briefly pushed me down the dark &lt;code class=&quot;highlighter-rouge&quot;&gt;Ctrl-R&lt;/code&gt; alley. The main reason is simple: You’re no longer hitting a &lt;code class=&quot;highlighter-rouge&quot;&gt;localhost:NNNN&lt;/code&gt; page anymore - instead you’re going out over the internet.&lt;/p&gt;
+
+&lt;p&gt;There are a few issues:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;On-Disk vs In-Memory builds of the site&lt;/li&gt;
+  &lt;li&gt;Hosts and DNS&lt;/li&gt;
+  &lt;li&gt;Ports (who uses which ports, who knows this, how to tell the various parties what’s where)&lt;/li&gt;
+  &lt;li&gt;Firewalls&lt;/li&gt;
+  &lt;li&gt;Things about HTML headers&lt;/li&gt;
+  &lt;li&gt;Things about websockets&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;I spent hours and hours and purpled all google searches I could think of. sometimes after spiraling around I’d come back around to older google search results but this time I’d have a different set of configuration combinations as a result of walking through &lt;em&gt;previous&lt;/em&gt; google search results so I’d try some of these things mixed in with weird combinations of other stuff I’d already tried.&lt;br /&gt;
+It was one big shitty salad of port, host, webserver combinations.&lt;/p&gt;
+
+&lt;p&gt;By the end, the viable solution is, in summary, this:&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;A publicly-accessible URL (let’s call it &lt;code class=&quot;highlighter-rouge&quot;&gt;http://devenv.com&lt;/code&gt;. and I already checked, it’s taken) with DNS records pointing this domain to the IP of the VPS we’re working off of.&lt;/li&gt;
+  &lt;li&gt;A static-built version of the files at &lt;code class=&quot;highlighter-rouge&quot;&gt;/dist&lt;/code&gt;, served up by a simple nginx server block pointed to the static &lt;code class=&quot;highlighter-rouge&quot;&gt;index.html&lt;/code&gt; when navigating to &lt;code class=&quot;highlighter-rouge&quot;&gt;http://devenv.com&lt;/code&gt;.&lt;/li&gt;
+  &lt;li&gt;webpack-dev-server running, serving an in-memory version of the site over local port &lt;code class=&quot;highlighter-rouge&quot;&gt;8080&lt;/code&gt;.
+    &lt;ul&gt;
+      &lt;li&gt;another nginx server block &lt;em&gt;using a subdomain such as&lt;/em&gt; &lt;code class=&quot;highlighter-rouge&quot;&gt;http://live-and-hmr.devenv.com&lt;/code&gt; which proxies the websocket connection over to the above webpack-dev-server process on &lt;code class=&quot;highlighter-rouge&quot;&gt;8080&lt;/code&gt;.&lt;/li&gt;
+    &lt;/ul&gt;
+  &lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;p&gt;What I didn’t understand originally was that webpack-dev-server &lt;strong&gt;is a server&lt;/strong&gt; (duh) and as a result nginx should not be &lt;em&gt;doing the serving&lt;/em&gt; of that resource. It merely needs to step aside and hand off the responsibility to webpack-dev-server. This tripped me up, conceptually, before it clicked and prevented me from reasoning properly enough about the solution in order to arrive at it earlier.&lt;/p&gt;
+
+&lt;p&gt;One wouldn’t have to use the two URLs (with and without the subdomain going to the static and dev-server versions) but I found it convenient to be able to work off the HMR dev-server version 90% of the time while keeping the convenience of building the site and flipping over to the static tab for a sort of more &lt;code class=&quot;highlighter-rouge&quot;&gt;productiony&lt;/code&gt; experience.&lt;/p&gt;
+
+&lt;p&gt;I thought a bit about why there were so few Stack Overflow posts or blog article about this solution and I arrived at: The remote dev vps approach is relatively uncommon and it may be even less common among front end developers. This is a bit of an assumption and maybe a rude-ish one, but one which is grounded by this bias: Front-end-mostly devs are more likely to be spending their valuable time working on javascript/webpack/gulp/styling workflows, etc. - all of which are noble pursuits and beautiful, but its easy to spend much of your time in that world without having to worry about hosting details, nginx, processes/ports, and the like.&lt;br /&gt;
+To be clear, this is not a value judgement. Quite the contrary; being a mostly-back-end-developer myself I started off with very little knowledge on the front end challenges listed above and I have a lot of respect for those who know this stuff inside and out.&lt;br /&gt;
+It has been a long and rewarding journey for me.&lt;/p&gt;
+
+&lt;h2 id=&quot;the-solution&quot;&gt;The Solution&lt;/h2&gt;
+
+&lt;p&gt;Enough of my yakking! When I finally got the thing working I hastily noted it all down in a GitHub Gist (after doing a lot of wild, expletive-laced celebratory gesturing). The Gist will likely make enough sense to someone well-versed in webpack and its configuring, but I don’t know that its the clearest thing. Let me know if you have questions.&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gist.github.com/vcavallo/4f11985c4364bc4edfdf56556bff4ccf&quot;&gt;Link to gist&lt;/a&gt;&lt;/li&gt;
+  &lt;li&gt;Embed:&lt;/li&gt;
+&lt;/ul&gt;
+&lt;noscript&gt;&lt;pre&gt;400: Invalid request
+&lt;/pre&gt;&lt;/noscript&gt;
+&lt;script src=&quot;https://gist.github.com/4f11985c4364bc4edfdf56556bff4ccf.js&quot;&gt; &lt;/script&gt;
+
+&lt;h2 id=&quot;bonus-for-rails--webpacker-users&quot;&gt;Bonus for Rails + Webpacker users&lt;/h2&gt;
+
+&lt;p&gt;There’s another post forthcoming on Rails + Webpacker over VPS, but for now here’s another hastily-written gist with the solution for that setup (warning: it’s &lt;em&gt;weirder&lt;/em&gt;):&lt;/p&gt;
+
+&lt;ul&gt;
+  &lt;li&gt;&lt;a href=&quot;https://gist.github.com/vcavallo/22cac63d01e3b73a56a92a619c6ff698&quot;&gt;Link to gist&lt;/a&gt;&lt;/li&gt;
+&lt;/ul&gt;
+
+&lt;hr /&gt;
+
+&lt;p&gt;Questions, comments, concerns and ridicule all welcome below!&lt;/p&gt;</content><author><name>Vinney Cavallo</name></author><summary type="html">Setting up webpack-dev-server HMR on a remote machine to work over nginx isn’t fun - but USING IT IS!</summary></entry><entry><title type="html">Setting up Middleman and Tailwind CSS</title><link href="http://localhost:4000/css/static_site_generator/how_to/2017/12/06/setting-up-middleman-with-tailwind-css.html" rel="alternate" type="text/html" title="Setting up Middleman and Tailwind CSS" /><published>2017-12-06T16:16:00-05:00</published><updated>2017-12-06T16:16:00-05:00</updated><id>http://localhost:4000/css/static_site_generator/how_to/2017/12/06/setting-up-middleman-with-tailwind-css</id><content type="html" xml:base="http://localhost:4000/css/static_site_generator/how_to/2017/12/06/setting-up-middleman-with-tailwind-css.html">&lt;p&gt;Middleman and Tailwind make landing pages a breeze (get it?). Here’s how to get them to work together!&lt;/p&gt;
 
 &lt;!--more--&gt;
 
