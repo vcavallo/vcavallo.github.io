@@ -10,11 +10,11 @@
   <link rel="icon" href="/favicon.png">
 
   <!-- Meta information -->
-  <title>Stack Undertow</title>
+  <title>debugging rspec tests that are leaky and break other tests</title>
   <meta name="description"
-        content="This is a place where Vinney Cavallo writes things about programming and other technical stuff">
+        content="This would be the excerpton cobbler concierge right now some tests seem to leak their db data into other tests(which is maddening because i’m using database ...">
   <link rel="canonical"
-        href="http://localhost:4000/404.html" />
+        href="http://localhost:4000/2018/06/15/debugging-rspec-tests-that-are-leaky-and-break-other-tests.html" />
 
   <!-- hack.css -->
   <link rel="stylesheet" href="https://npmcdn.com/hack/dist/hack.css" />
@@ -76,26 +76,76 @@
         </aside>
 
         <main class="cell -9of12">
-          <style type="text/css" media="screen">
-  .container {
-    margin: 10px auto;
-    max-width: 600px;
-    text-align: center;
-  }
-  h1 {
-    margin: 30px 0;
-    font-size: 4em;
-    line-height: 1;
-    letter-spacing: -1px;
-  }
-</style>
+          <article class="post" itemscope itemtype="http://schema.org/BlogPosting">
 
-<div class="container">
-  <h1>404</h1>
+  <header class="post-header">
+    <h1 class="post-title" itemprop="name headline">debugging rspec tests that are leaky and break other tests</h1>
+    <p class="post-meta">
+      Posted on <time datetime="2018-06-15T10:22:41-04:00"
+            itemprop="datePublished"
+            class="media-heading">
+        Jun 15, 2018 
+      </time>
 
-  <p><strong>Page not found :(</strong></p>
-  <p>The requested page could not be found.</p>
-</div>
+      
+        By <span itemprop="author" itemscope itemtype="http://schema.org/Person">
+          <span itemprop="name">Vinney Cavallo</span>
+        </span>
+      
+    </p>
+  </header>
+
+  <div class="post-content" itemprop="articleBody">
+    
+      
+      <p>This would be the excerpt</p>
+
+<!-- more -->
+
+<p>on cobbler concierge right now some tests seem to leak their db data into other tests
+(which is maddening because i’m using database cleaner!!) in order to troubleshoot it
+i can’t just run the failing tests on their own, because they pass that way… i need
+to find a troublesome test and then try a all the other tests in front of it.. i’m
+writing a ruby script to do just that.</p>
+
+<p>useful for skipping all remaining tests after a failure - in place of –fail-fast i guess?</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  before :all do
+    $continue = true
+  end
+
+  around :each do |example|
+    if $continue
+      $continue = false
+      example.run
+      $continue = true unless example.exception
+    else
+      example.skip
+    end
+  end
+</code></pre></div></div>
+
+<p>useful for checking state (like db) after each test - i once found some leftover data
+even though DatabaseCleaner was supposed to be running.
+somehow the above issue was related to <code class="highlighter-rouge">around(:each)</code> usage in tests for some fucky reason
+i never figured out.</p>
+<div class="highlighter-rouge"><div class="highlight"><pre class="highlight"><code>  around(:each) do |ex|
+		if codes.any?
+			puts "******* there are partner codesssssssssssssssssssssssssssssssssssssssssssssssssss!@!!!!"
+			puts "*** codes: { codes }"
+			fail
+		elsif codes.include?("tx1")
+			puts "*********** wtf there is a tx1 fkfkfkfkkfkfkfkkfkfkkfkfkfkf"
+			puts "*** codes: { codes }"
+			fail
+		end
+	end
+</code></pre></div></div>
+
+
+    
+  </div>
+
+</article>
 
         </main>
       </div>
