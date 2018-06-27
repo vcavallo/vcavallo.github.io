@@ -1,8 +1,8 @@
 GIT
   remote: git@github.com:vcavallo/jekyll-hackcss.git
-  revision: e7221874c182ab3c14a0ac6a71db4870af24bc20
+  revision: 6f70dd0f256c1d48c71d889b4ec39aca410046ab
   specs:
-    jekyll-hackcss (0.1.3)
+    jekyll-hackcss (0.2.1)
       jekyll (~> 3.6)
       jekyll-seo-tag (~> 2.0)
 

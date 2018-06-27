@@ -11,6 +11,7 @@ source "https://rubygems.org"
 gem "jekyll", "~> 3.6.2"
 
 gem "jekyll-hackcss", git: "git@github.com:vcavallo/jekyll-hackcss.git"
+#gem "jekyll-hackcss", path: "/Users/vinney/development/experiments/jekyll-hackcss"
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and
 # uncomment the line below. To upgrade, run `bundle update github-pages`.
