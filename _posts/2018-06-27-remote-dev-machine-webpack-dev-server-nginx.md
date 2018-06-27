@@ -63,4 +63,6 @@ There's another post forthcoming on Rails + Webpacker over VPS, but for now here
 
 ----------
 
+(cross-posted to [dev.to](https://dev.to/vinneycavallo/using-webpack-dev-server-and-hmr-on-a-remote-machinevps-303c))
+
 Questions, comments, concerns and ridicule all welcome below!
