@@ -20,6 +20,7 @@ gem "jekyll-hackcss", git: "git@github.com:vcavallo/jekyll-hackcss.git"
 group :jekyll_plugins do
   gem "jekyll-feed", "~> 0.6"
   gem 'jekyll-compose'
+  gem "jekyll-gist"
   #gem "github-pages"
 end
 
