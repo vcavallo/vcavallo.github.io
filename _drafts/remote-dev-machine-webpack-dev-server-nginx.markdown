@@ -8,6 +8,10 @@ description: How to get webpack-dev-server, HMR and livereloading working over n
 keywords: webpack, webpack-dev-server, hmr, vps, javascript, nginx
 ---
 
+_Setting up_ webpack-dev-server HMR on a remote machine isn't fun - but **USING IT IS!**
+
+<!-- more -->
+
 **The Problem:** Using `webpack-dev-server`'s livereloading and HMR features on a remote machine (probably over nginx)
 
 **<a href="#the-solution">The Solution</a>** is further down on this page for the impatient _(or those who very reasonably don't care to read about how I got into this situation and how long it took me to solve it!)_.
