@@ -10,9 +10,15 @@ keywords: middleman, tailwind, css, webpack, heroku
 description: How to set up Middleman and Tailwindcss and deploy to Heroku
 ---
 
+<a href="{{ site.url }}{{ page.url }}">
+  ![Hero Image]({{ "/assets/middleman-tailwind-hero.png" | absolute_url }})
+</a>
+
 Middleman and Tailwind make landing pages a breeze (get it?). Here's how to get them to work together!
 
 <!--more-->
+
+![Hero Image]({{ "/assets/middleman-tailwind-hero.png" | absolute_url }})
 
 I'm a big fan of the [Middleman](https://middlemanapp.com/) static site generator and static sites / markdown blogs in general:
 
