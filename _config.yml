@@ -23,6 +23,18 @@ author: Vinney Cavallo # TODO include this in readme
 
 subtitle: Vinney Cavallo && Doing Things With Data.
 
+defaults:
+  -
+    scope:
+      path: ""
+      type: "posts"
+    values:
+      layout: "post"
+      comments: true
+      excerpted: true
+      description: "Vinney Cavallo's technical blog primarily covering Ruby on Rails, Javascript, Linux and learning"
+      keywords: "software, web development, dev, tutorials"
+
 show_excerpts: true
 custom_styles: true
 
