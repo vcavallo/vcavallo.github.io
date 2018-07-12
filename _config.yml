@@ -15,7 +15,8 @@
 # in the templates via {{ site.myvariable }}.
 title: Stack Undertow
 email: vinney@exnil.io
-description: This is a place where Vinney Cavallo writes things about programming and other technical stuff
+# description: This is a place where Vinney Cavallo writes things about programming and other technical stuff
+description: Vinney Cavallo's technical blog primarily covering Ruby on Rails, Javascript, Linux and learning
 baseurl: "" # the subpath of your site, e.g. /blog
 url: http://vcavallo.github.io
 your_name: Vinney Cavallo

@@ -10,7 +10,7 @@ source "https://rubygems.org"
 # Happy Jekylling!
 gem "jekyll", "~> 3.6.2"
 
-gem "jekyll-hackcss", git: "git@github.com:vcavallo/jekyll-hackcss.git"
+gem "jekyll-hackcss"
 #gem "jekyll-hackcss", path: "/Users/vinney/development/experiments/jekyll-hackcss"
 
 # If you want to use GitHub Pages, remove the "gem "jekyll"" above and

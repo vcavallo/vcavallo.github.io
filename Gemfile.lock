@@ -1,11 +1,3 @@
-GIT
-  remote: git@github.com:vcavallo/jekyll-hackcss.git
-  revision: 6f70dd0f256c1d48c71d889b4ec39aca410046ab
-  specs:
-    jekyll-hackcss (0.2.1)
-      jekyll (~> 3.6)
-      jekyll-seo-tag (~> 2.0)
-
 GEM
   remote: https://rubygems.org/
   specs:
@@ -33,6 +25,9 @@ GEM
       jekyll (~> 3.3)
     jekyll-gist (1.5.0)
       octokit (~> 4.2)
+    jekyll-hackcss (0.2.2)
+      jekyll (~> 3.6)
+      jekyll-seo-tag (~> 2.0)
     jekyll-sass-converter (1.5.2)
       sass (~> 3.4)
     jekyll-seo-tag (2.5.0)
@@ -75,7 +70,7 @@ DEPENDENCIES
   jekyll-compose
   jekyll-feed (~> 0.6)
   jekyll-gist
-  jekyll-hackcss!
+  jekyll-hackcss
 
 BUNDLED WITH
    1.16.1
