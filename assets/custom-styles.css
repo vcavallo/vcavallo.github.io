@@ -8,3 +8,6 @@ img {
 
 .post-excerpt-with-links a {
   text-decoration: none; }
+
+.indexed-post {
+  margin-bottom: 8em !important; }
